@@ -1,0 +1,1112 @@
+@font-face {
+  font-family: 'Pretendard-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+  // font-weight: 400;
+  font-style: normal;
+}
+* {
+  list-style: none;
+  text-decoration: none;
+  padding: 0;
+  margin: 0;
+  letter-spacing: -0.7px;
+  box-sizing: border-box;
+  font-family: 'Pretendard-Regular';
+}
+
+p, dl, dt, dd, li {
+  color: white;
+  font-size: 1.2rem;
+  font-family: 'Pretendard-Regular';
+}
+.App {
+  text-align: center;
+  position: relative;
+  width: 100vw;
+  // height: 5000px;
+  background-color: #15181d;
+  header {
+    height: 100px;
+    border-bottom: 1px solid #40444f;
+    position: fixed;
+    top: 0;
+    z-index: 9;
+    width: 100%;
+    background-color: #15181d;
+    > div {
+      position: absolute;
+      left: 2%;
+      top: 0%;
+      width: 99px;
+      height: 99px;
+      transform: scale(0.6);
+      z-index: 999999;
+      > a {
+        display: block;
+      }
+      img {
+        width: 100%;
+      }
+    }
+    form {
+      height: 100%;
+      position: relative;
+      .inputwrapper {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        input {
+          width: 400px;
+          height: 50px;
+          padding: 0 40px;
+          border-radius: 25px;
+          font-size: 1rem;
+        }
+        button {
+          position: absolute;
+          right: 5%;
+          top: 50%;
+          transform: translateY(-50%);
+          padding: 5px;
+          background-color: transparent;
+          border: none;
+        }
+        > img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+  }
+  .first-main {
+    // position: absolute;
+    //top:200px
+    padding: 200px 0 0 0;
+    .search-box {
+      >ul {
+        display: flex;
+        flex-wrap: wrap;
+        width: 80%;
+        margin: 0 auto;
+        li {
+          width: 23%;
+          margin-bottom: 5%;
+          &:not(:nth-child(4n)) {
+            margin-right: 2.5%;
+          }
+          a {
+            .char-box {
+              .server {
+                width: 70%;
+                margin: 0 auto;
+                border-radius: 25px;
+                background-color: #40444f;
+              }
+              p {
+                &:nth-of-type(1) {
+                  margin-bottom: 5%;
+                }
+                &:nth-of-type(2) {
+                  img {
+                    width: 200px;
+                    height: 230px;
+                  }
+                }
+              }
+              .char-info {
+                display: flex;
+                width: 100%;
+                flex-wrap: wrap;
+                > p {
+                  width: 49%;
+                  &:nth-child(even) {
+                    text-align: left;
+                    padding-left: 5%;
+                  }
+                  &:nth-child(odd) {
+                    text-align: right;
+                  }
+                  // &:first-child {
+                  //   padding-left: 25%;
+                  // }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+#root {
+  .second-main {
+    position: relative;
+    width: 100vw;
+    background-color: #0e1015;
+    .char {
+      padding-bottom: 1000px;
+      .name {
+        border-bottom: 1px solid #40444f;
+        font-weight: 800;
+        font-size: 1.5rem;
+        text-align: center;
+        margin-bottom: 30px;
+        .name-sub {
+          width: 72.916%;
+          margin: 0 auto;
+          line-height: 36px;
+          position: relative;
+          > a {
+            z-index: 9999;
+            position: absolute;
+            left: 12%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            height: 58px;
+            > p {
+              height: 58px;
+              img {
+                width: 58px;
+                height: 58px;
+              }
+            }
+          }
+          .header-sub {
+            display: inline-block;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 999;
+            cursor: pointer;
+            background-color: #0e1015;
+            .list {
+              display: flex;
+              align-items: center;
+              position: relative;
+              z-index: 9999;
+              background-color: #0e1015;
+              padding: 10px 0;
+              .e {
+                padding-right: 5px;
+              }
+              > div {
+                display: inherit;
+                transform: scale(0.8);
+                transition: 0.3s;
+              }
+              .deg {
+                transform: rotateX(180deg) scale(0.8);
+              }
+            }
+            .hidden {
+              width: 100%;
+              transition: 0.5s;
+              position: absolute;
+              left: 50%;
+              background-color: #0e1015;
+              border-radius: 0 0 25px 25px;
+              > ul {
+                > li {
+                  a {
+                    &:link {
+                      color: white;
+                    }
+                    &:visited {
+                      color: white;
+                    }
+                    &:hover {
+                      color: #40444f;
+                    }
+                  }
+                  &:not(:last-child) {
+                    border-bottom: 1px solid white;
+                  }
+                }
+              }
+            }
+            .active {
+              transform: translate(-50%, 0%);
+            }
+            .noActive {
+              transform: translate(-50%, -100%);
+            }
+          }
+          span {
+            img {
+              width: 24px;
+              height: 24px;
+              transform: scale(1.5);
+              
+            }
+          }
+        }
+      }
+      .info {
+        margin-bottom: 50px;
+        .info-box {
+          justify-content: center;
+          display: flex;
+          width: 90%;
+          margin: 0 auto;
+          .serve {
+            width: 20%;
+            order: -1;
+            dl {
+              display: flex;
+              align-items: center;
+              font-size: 1.2rem;
+              text-align: center;
+              &:not(:last-child){
+                margin-bottom: 10px;
+              }
+              dt {
+                display: inline-block;
+                background-color: #40444f;
+                border-radius: 20px;
+                font-weight: 700;
+                &:nth-of-type(1) {
+                  padding: 2px 5px;
+                  margin-right: 10px;
+                }
+              }
+            }
+          }
+          > div {
+            &:nth-child(1) {
+              width: 40%;
+              .image {
+                width: 90%;
+                height: 700px;
+                object-fit: cover;
+              }
+            }
+          }
+          .stats {
+            width: 15%;
+            text-align: center;
+            .stats-box {
+              display: flex;
+              flex-direction: column;
+              .basic {
+                display: flex;
+                flex-wrap: wrap;
+                margin-bottom: 10px;
+                > p {
+                  width: 100%;
+                  background-color: #40444f;
+                  border-radius: 25px;
+                  margin-bottom: 10px;
+                }
+                .basic-second {
+                  width: 100%;
+                  display: flex;
+                  div {
+                    width: 50%;
+                    p {
+                      &:nth-of-type(2) {
+                        color: #b34300;
+                      }
+                    }
+                  }
+                }
+              }
+              .war {
+                display: flex;
+                flex-wrap: wrap;
+                > p {
+                  width: 100%;
+                  background-color: #40444f;
+                  display: inline-block;
+                  border-radius: 25px;
+                  margin-bottom: 10px;
+                }
+                .war-second {
+                  width: 100%;
+                  display: flex;
+                  flex-wrap: wrap;
+                  div {
+                    justify-content: space-between;
+                    width: 50%;
+                    display: flex;
+                    p {
+                      &:nth-of-type(1) {
+                        padding: 0 0 10px 0;
+                      }
+                      &:nth-of-type(2) {
+                        color: #b34300;
+                        padding-right: 10px;
+                      }
+                    }
+                  }
+                }
+              }
+              .mococo {
+                display: flex;
+                flex-wrap: wrap;
+                > p {
+                  width: 100%;
+                  background-color: #40444f;
+                  display: inline-block;
+                  border-radius: 25px;
+                  margin-bottom: 10px;
+                }
+                .mococo-second {
+                  width: 100%;
+                  display: flex;
+                  flex-wrap: wrap;
+                  div {
+                    justify-content: space-between;
+                    width: 50%;
+                    display: flex;
+                    p {
+                      &:nth-of-type(1) {
+                        padding: 0 0 10px 0;
+                      }
+                      &:nth-of-type(2) {
+                        color: #b34300;
+                        padding-right: 10px;
+                      }
+                    }
+                  }
+                }
+              }
+              .engrave {
+                > p {
+                  width: 100%;
+                  background-color: #40444f;
+                  border-radius: 25px;
+                  margin-bottom: 10px;
+                }
+                .engrave-second {
+                  div {
+                    margin-bottom: 10px;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      .more {
+        width: 100%;
+        text-align: center;
+        > div {
+          width: 72.916%;
+          margin: 0 auto;
+          > ul {
+            display: flex;
+            justify-content: center;
+            li {
+              border: 1px solid white;
+              border-radius: 5px;
+              margin: 0 5px;
+              position: relative;
+              img {
+                width: 100%;
+                height: 100%;
+              }
+              > p {
+                font-size: 1rem;
+                width: 25px;
+                position: absolute;
+                right: -7px;
+                bottom: -7px;
+                border: 1px solid white;
+                border-radius: 5px;
+                background-color: #0e1015;
+              }
+              .hidden {
+                display: none;
+              }
+              .tips{
+                display: block;
+                width: 150px;
+                background-color: black;
+                position: absolute;
+                bottom: 77px;
+                left: -50%;
+              }
+            }
+          }
+        }
+      }
+      .weapon-wrap {
+        max-width: 1920px;
+        width: 100%;
+        .wrap {
+          .see {
+            text-align: center;
+            margin: 60px 0;
+            > button {
+              cursor: pointer;
+              border: none;
+              background-color: #0e1015;
+              color: white;
+              border-bottom: 3px solid #40444f;
+              padding-bottom: 3px;
+            }
+          }
+          .eq {
+            .weapon {
+              display: flex;
+              width: 50%;
+              flex-wrap: wrap;
+              margin: 0 auto;
+              .eq-weapon {
+                display: flex;
+                padding-left: 100px;
+                figure {
+                  margin-bottom: 10px;
+                  position: relative;
+                  > img {
+                    border: 1px solid #dee2e6;
+                    border-radius: 0.25rem;
+                    max-width: 100%;
+                    height: auto;
+                    vertical-align: middle;
+                  }
+                  .num {
+                    position: absolute;
+                    width: 100%;
+                    transform: translateY(-50%);
+                    text-align: center;
+                    > img {
+                      border-radius: 0.25rem;
+                      border: 1px solid white;
+                      width: 33.3333333%;
+                      height: auto;
+                    }
+                  }
+                  .quality {
+                    bottom: 0;
+                    position: absolute;
+                    border: 1px solid white;
+                    border-radius: 0.25rem;
+                    height: 10px;
+                    width: 100%;
+                    background: #111518;
+                    > p {
+                      height: 100%;
+                    }
+                  }
+                }
+              }
+              > div {
+                width: 50%;
+                > div {
+                  display: flex;
+                  flex-direction: column;
+                  p {
+                    display: inline-block;
+                    padding: 7px 0 0 7px;
+                    // &:nth-of-type(2) {
+                    //   padding-top: 10px;
+                    // }
+                  }
+                }
+              }
+            }
+          }
+          .noShow {
+            display: none;
+          }
+          .show { 
+            display: block;
+          }
+        }
+        
+      }
+    }
+  }
+}
+
+//반응형 280까지 문제 없음
+//200 이하부터 문제 발생
+@media screen and (max-width: 1575px) {
+  .App {
+    .first-main {
+      .search-box {
+        > ul {
+          li {
+            a {
+              .char-box {
+                .char-info {
+                  p {
+                    &:nth-child(odd) {
+                      padding-right: 2px;
+                    }
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  #root {
+    .second-main {
+      .char {
+        .name {
+          .name-sub {
+            > a {
+              left: 0%;
+            }
+          }
+        }
+        .info {
+          .info-box {
+            width: 100%;
+            .serve {
+              width: 20%;
+            }
+            .stats {
+              width: 20%;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 1365px) {
+  #root {
+    .second-main {
+      .char {
+        .weapon-wrap {
+          .wrap {
+            .eq {
+              .weapon {
+                width: 60%;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 1145px) {
+  #root {
+    .second-main {
+      .char {
+        .weapon-wrap {
+          .wrap {
+            .eq {
+              .weapon {
+                width: 70%;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 1024px) {
+  .App {
+    .first-main {
+      padding: 150px 0 1000px;
+      .search-box {
+        > ul {
+          width: 100%;
+          justify-content: center;
+          li {
+            width: 30%;
+            &:nth-child(even) {
+              margin: 0 5% 10% 5%;
+            }
+            &:nth-child(odd) {
+              margin: 0 5% 10% 5%;
+            }
+          }
+        }
+      }
+    }
+  }
+  #root {
+    .second-main {
+      .char {
+        .info {
+          .info-box {
+            .serve {
+              width: 25%;
+              dl {
+                dd {
+                  overflow: hidden;
+                  white-space: nowrap;
+                  text-overflow: ellipsis;
+                }
+              }
+            }
+            .stats {
+              width: 25%;
+            }
+          }
+        }
+        .more {
+          > div {
+            width: 100%;
+          }
+        }
+        .weapon-wrap {
+          .wrap {
+            .eq {
+              .weapon {
+                width: 100%;
+                .eq-weapon {
+                  padding-left: 70px;
+                }
+              } 
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 768px) {
+  .App {
+    .first-main {
+      .search-box {
+        > ul {
+          li {
+            a {
+              .char-box {
+                p {
+                  &:nth-of-type(1) {
+                    font-size: 1.1rem;
+                  }
+                }
+                .char-info {
+                  p {
+                    font-size: 1rem;
+                    &:nth-child(even) {
+                      overflow: hidden;
+                      white-space: nowrap;
+                      text-overflow: ellipsis;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  #root {
+    dl, dd, dt {
+      font-size: 1.5rem;
+    }
+    p {
+      font-size: 1.3rem;
+    }
+    .second-main {
+      .char {
+        .info {
+          margin-bottom: 0;
+          .info-box {
+            flex-wrap: wrap;
+            > div {
+              &:nth-of-type(1) {
+                margin-bottom: 20px;
+              }
+            }
+            .stats {
+              .stats-box {
+                .war {
+                  .war-second {
+                    div {
+                      p {
+                        &:nth-of-type(1) {
+                          padding: 0 0 15px 0;
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            > div {
+              &:nth-child(1) {
+                width: 100%;
+                .image {
+                  width: 100%;
+                  height: auto;
+                }
+              }
+            }
+            .serve {
+              width: 49%;
+              order: 0;
+              display: inline-block;
+            }
+            .stats {
+              width: 38%;
+            }
+          }
+        }
+        .more {
+          > div {
+            > ul {
+              flex-wrap: wrap;
+              li {
+                width: 12%;
+                margin-bottom: 12px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 660px) {
+  #root {
+    .second-main {
+      .char {
+        .weapon-wrap {
+          .wrap {
+            .eq {
+              .weapon {
+                .eq-weapon {
+                  padding-left: 30px;
+                }
+              } 
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 580px) {
+  #root {
+    .second-main {
+      .char {
+        .weapon-wrap {
+          .wrap {
+            .eq {
+              transform: scale(0.9);
+              .weapon {
+                .eq-weapon {
+                  padding-left: 0px;
+                  > div {
+                    p {
+                      &:nth-of-type(2) {
+                        font-size: 1.2rem;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 480px) {
+  .App {
+    header {
+      form {
+        .inputwrapper {
+          input {
+            width: 200px;
+            padding: 0 20px;
+          }
+        }
+      }
+    }
+    .first-main {
+      .search-box {
+        > ul {
+          li {
+            width: 95%;
+          }
+        }
+      }
+    }
+  }
+  #root {
+    dl, dd, dt {
+      font-size: 1.2rem;
+    }
+    p {
+      font-size: 1.1rem;
+    }
+    .second-main {
+      .char {
+        .info {
+          margin-bottom: 0;
+          .info-box {
+            flex-wrap: wrap;
+            .stats {
+              .stats-box {
+                .war {
+                  .war-second {
+                    div {
+                      p {
+                        &:nth-of-type(1) {
+                          padding: 0 5px 10px 0;
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            > div {
+              &:nth-child(1) {
+                width: 100%;
+                .image {
+                  width: 100%;
+                  height: auto;
+                }
+              }
+            }
+            .serve {
+              width: 49%;
+              order: 0;
+              display: inline-block;
+            }
+            .stats {
+              width: 49%;
+            }
+          }
+        }
+        .more {
+          > div {
+            > ul {
+              flex-wrap: wrap;
+              li {
+                width: 12%;
+                margin-bottom: 12px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 455px) {
+  #root {
+    .second-main {
+      .char {
+        .weapon-wrap {
+          .wrap {
+            .eq {
+              transform: scale(1);
+              .weapon {
+                .eq-weapon {
+                  padding-left: 0px;
+                  overflow: hidden;
+                  figure {
+                    > img {
+                      width: 46px;
+                    }
+                  }
+                  > div {
+                    overflow: hidden;
+                    p {
+                      padding: 0 0 0 5px;
+                      &:nth-of-type(2) {
+                        font-size: 1.1rem;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 410px) {
+  #root {
+    .second-main {
+      .char {
+        .weapon-wrap {
+          .wrap {
+            .eq {
+              transform: scale(1);
+              .weapon {
+                .eq-weapon {
+                  padding-left: 0px;
+                  > div {
+                    p {
+                      font-size: 1rem;
+                      &:nth-of-type(2) {
+                        font-size: 1rem;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 390px) {
+  #root {
+    dl, dd, dt {
+      font-size: 1rem;
+    }
+    p {
+      font-size: 0.9rem;
+    }
+    .second-main {
+      .char {
+        .info {
+          margin-bottom: 0;
+          .info-box {
+            flex-wrap: wrap;
+            .stats {
+              .stats-box {
+                .war {
+                  .war-second {
+                    div {
+                      p {
+                        &:nth-of-type(1) {
+                          padding: 0 0 10px 0;
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            > div {
+              &:nth-child(1) {
+                width: 100%;
+                .image {
+                  width: 100%;
+                  height: auto;
+                }
+              }
+            }
+            .serve {
+              width: 51%;
+              order: 0;
+              display: inline-block;
+            }
+            .stats {
+              width: 38%;
+            }
+          }
+        }
+        .more {
+          > div {
+            > ul {
+              flex-wrap: wrap;
+              li {
+                width: 12%;
+                margin-bottom: 12px;
+              }
+            }
+          }
+        }
+        .weapon-wrap {
+          .wrap {
+            .eq {
+              .weapon {
+                .eq-weapon {
+                  > div {
+                    p {
+                      font-size: 0.9rem;
+                      &:nth-of-type(2) {
+                        font-size: 0.9rem;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 350px) {
+  #root {
+    .second-main {
+      .char {
+        .weapon-wrap {
+          .wrap {
+            .eq {
+              .weapon {
+                .eq-weapon {
+                  figure {
+                    margin-bottom: 5px;
+                  }
+                  > div {
+                    p {
+                      &:nth-of-type(2) {
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 330px) {
+  #root {
+    .second-main {
+      .char {
+        .info {
+          .info-box {
+            .stats {
+              .stats-box {
+                .war {
+                  .war-second {
+                    div {
+                      p {
+                        &:nth-of-type(2) {
+                          padding-right: 5px;
+                        }
+                      }
+                    }
+                  }
+                }
+                .mococo {
+                  .mococo-second {
+                    div {
+                      p {
+                        &:nth-of-type(2) {
+                          padding-right: 5px;
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
