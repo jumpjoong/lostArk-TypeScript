@@ -1,17 +1,34 @@
-import { useContext, useEffect, useRef, useState } from "react"
-import { AppC, AppContextProps } from "../context/Context"
-import Insert from "./Insert/Insert"
+import { useContext, useEffect, useRef, useState } from "react";
+import { AppC, AppContextProps } from "../context/Context";
+import Insert from "./SearchInput/Insert";
+import { ObjectCharacter } from "../type/typeContext";
+import Group from "./Group/Group";
 interface CharacterName {
   CharacterName: string
 }
-
 function Main() {
   const { input, elName, organ } = useContext<AppContextProps>(AppC);
-  const length = useRef<number>(0)
-  const [state, setState] = useState(0)
-  
+  const length = useRef<number>(0);
+  const [state, setState] = useState(0);
+  const body = document.getElementsByTagName("body")[0];
 
   const searchE = () => {
+    const update = (privacy: ObjectCharacter) => {
+      organ.current = [...organ.current, privacy]
+      // Ref에 쌓이고 렌더링이 일어날 수 있게 마지막에 렌더링시킴, 레벨순으로 정렬
+      if (organ.current.length === length.current) {
+        organ.current.sort((a, b)=> {
+          if (a.ItemMaxLevel > b.ItemMaxLevel) {
+            return -1;
+          } else if (a.ItemMaxLevel < b.ItemMaxLevel) {
+            return 1;
+          } else {
+            return 0;
+          }
+        })
+        setState(state + 1);
+      }
+    }
     input && fetch(`https://developer-lostark.game.onstove.com/characters/${input}/siblings`, {
       headers:{
         'accept':'application/json',
@@ -34,25 +51,8 @@ function Main() {
         })
       })
     });
-    const update = (privacy: object) => {
-      organ.current = [...organ.current, privacy]
-      //Ref에 쌓이고 렌더링이 일어날 수 있게 마지막에 렌더링시킴, 레벨순으로 정렬
-      if (organ.current.length === length.current) {
-        organ.current.sort((a, b)=> {
-          if (a.ItemMaxLevel > b.ItemMaxLevel) {
-            return -1;
-          } else if (a.ItemMaxLevel < b.ItemMaxLevel) {
-            return 1;
-          } else {
-            console.log(a, b);
-            return 0;
-          }
-        })
-        setState(state + 1);
-      }
-    }
+    
   };
-    console.log(organ)
    //마지막 개수 확인용 및 없는 닉네임 에러 출력
   const group = (aaa: []) => {
     try {
@@ -64,22 +64,25 @@ function Main() {
   }
   //인풋의 값이 바뀌면 img길이 초기화하고 searchE 실행
   useEffect(() => {
+    organ.current = []
     searchE();
+    body.style.height = "100vh";
+    body.style.backgroundColor = "#15181d";
     // eslint-disable-next-line react-hooks/exhaustive-deps
   },[input])
-
+  console.log(organ)
   return (
     <div className="App">
       <header>
         <Insert/>
       </header>
-      {/* <main className="first-main">
+      <main className="first-main">
         <div className="search-box">
           <ul>
             <Group />
           </ul>
         </div>
-      </main> */}
+      </main>
     </div>
   )
 }

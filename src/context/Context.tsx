@@ -1,31 +1,11 @@
 import { createContext, useRef, useState } from "react"
+import { ObjectCharacter } from "../type/typeContext"
 
 export interface AppContextProps {
   elName: React.RefObject<HTMLInputElement>;
   search: (e: React.FormEvent<HTMLFormElement>) => void;
   input?: string;
-  organ: React.MutableRefObject<object[]>;
-}
-
-interface aaaa {
-  CharacterClassName: string;
-  CharacterImage?: string;
-  CharacterLevel: number;
-  CharacterName: string;
-  ExpeditionLevel: number;
-  GuildMemberGrade?: string;
-  GuildName?: string;
-  ItemAvgLevel: string;
-  ItemMaxLevel: string;
-  PvpGradeName?: string;
-  ServerName: string;
-  Stats: [];
-  Tendencies: [];
-  Title?: string | null
-  TotalSkillPoint: number;
-  TownLevel: number;
-  TownName: string;
-  UsingSkillPoint: number
+  organ: React.MutableRefObject<ObjectCharacter[]>;
 }
 
 export const AppC = createContext<AppContextProps>({} as AppContextProps);
@@ -33,7 +13,7 @@ export const AppC = createContext<AppContextProps>({} as AppContextProps);
 export const Context = ({children}: {children: JSX.Element}) => {
   const elName = useRef<HTMLInputElement>(null);
   const [input, setInput] = useState<string>();
-  const organ = useRef<object[]>([]);
+  const organ = useRef<ObjectCharacter[]>([]);
   
   const search: AppContextProps['search'] = (e) => {
     e.preventDefault();
@@ -45,7 +25,7 @@ export const Context = ({children}: {children: JSX.Element}) => {
     document.cookie = "crossCookie=bar; SameSite=None; Secure";
   }
 
-  const value = {elName, search, input, organ}
+  const value = { elName, search, input, organ }
 
   return (
     <AppC.Provider value={value}>
