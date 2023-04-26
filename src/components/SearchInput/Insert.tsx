@@ -1,9 +1,9 @@
 import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
-import { AppC, AppContextProps } from '../../context/Context'
+import { AppC } from '../../context/Context'
 
 function Insert() {
-  const { elName, search } = useContext<AppContextProps>(AppC);
+  const { elName, search } = useContext(AppC);
   
   return (
     <>

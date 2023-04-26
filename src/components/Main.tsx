@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { AppC, AppContextProps } from "../context/Context";
+import { AppC } from "../context/Context";
 import Insert from "./SearchInput/Insert";
 import { ObjectCharacter } from "../type/typeContext";
 import Group from "./Group/Group";
@@ -7,7 +7,7 @@ interface CharacterName {
   CharacterName: string
 }
 function Main() {
-  const { input, elName, organ } = useContext<AppContextProps>(AppC);
+  const { input, elName, organ } = useContext(AppC);
   const length = useRef<number>(0);
   const [state, setState] = useState(0);
   const body = document.getElementsByTagName("body")[0];
@@ -38,15 +38,15 @@ function Main() {
     .then(res => res.json())
     .then(characters => {
       group(characters)
-      characters.map((obj: CharacterName)=> {
-        fetch(`https://developer-lostark.game.onstove.com/armories/characters/${obj.CharacterName}/profiles`,{
+      characters.map(async(obj: CharacterName)=> {
+        return await fetch(`https://developer-lostark.game.onstove.com/armories/characters/${obj.CharacterName}/profiles`,{
             headers:{
               'accept':'application/json',
               'authorization':'bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IktYMk40TkRDSTJ5NTA5NWpjTWk5TllqY2lyZyIsImtpZCI6IktYMk40TkRDSTJ5NTA5NWpjTWk5TllqY2lyZyJ9.eyJpc3MiOiJodHRwczovL2x1ZHkuZ2FtZS5vbnN0b3ZlLmNvbSIsImF1ZCI6Imh0dHBzOi8vbHVkeS5nYW1lLm9uc3RvdmUuY29tL3Jlc291cmNlcyIsImNsaWVudF9pZCI6IjEwMDAwMDAwMDAxMDQzNjkifQ.m8gzbGMVUWCWjtKflQzWnUCoPipdIBqaB5g60LJmr_DA505X6PrDMtTIsH9O_1DqXKdapyXzhs3kHrMgGl_FPlUsDSjkX9aYH2B77mUOLaNDUpqRHQOsIvWZz4Pi0-StkK4OLec0Av_B3VPUBqd4XGgOyrzTh8umEJB5q5hdjPkk0mfjxCflmuVWtxC9TYx-JvM50thbbZ8tcDWUIOUX7AExcGp7wlJ64SejlpD3VUscA3x21-3xxjDn1TjmjbE41-2K8nGHZsXIJ86MGEbZnzxDkECjhHyKtxvNbDUJySIP4qRlzmOiUQuXGopvt-zeEWyNYkDvep7iQ2jhNFaQlQ'
             }
         })
-        .then( res => res.json())
-        .then( privacy => {
+        .then(res => res.json())
+        .then(privacy => {
           update(privacy)
         })
       })
@@ -54,9 +54,9 @@ function Main() {
     
   };
    //마지막 개수 확인용 및 없는 닉네임 에러 출력
-  const group = (aaa: []) => {
+  const group = (groupLength: []) => {
     try {
-      length.current = aaa.length
+      length.current = groupLength.length
     } catch {
       alert('닉네임 정보가 없습니다! 다시 입력하세요.')
       elName.current!.value = ''
