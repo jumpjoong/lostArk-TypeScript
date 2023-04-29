@@ -12,9 +12,26 @@ export interface ObjectCharacter {
   ServerName: string;
   Stats: object[];
   Tendencies: object[];
-  Title?: string | null
+  Title?: string | null;
   TotalSkillPoint: number;
   TownLevel: number;
   TownName: string;
-  UsingSkillPoint: number
+  UsingSkillPoint: number;
+}
+
+export interface Effects {
+  Description: string;
+  GemSlot: number;
+  Icon: string;
+  Name: string;
+  Tooltip: string;
+}
+
+export interface Gems {
+  Grade: string;
+  Icon: string;
+  Level: number;
+  Name: string;
+  Slot: number;
+  Tooltip: number;
 }

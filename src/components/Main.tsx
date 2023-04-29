@@ -3,16 +3,20 @@ import { AppC } from "../context/Context";
 import Insert from "./SearchInput/Insert";
 import { ObjectCharacter } from "../type/typeContext";
 import Group from "./Group/Group";
+
 interface CharacterName {
   CharacterName: string
 }
+
 function Main() {
   const { input, elName, organ } = useContext(AppC);
   const length = useRef<number>(0);
   const [state, setState] = useState(0);
   const body = document.getElementsByTagName("body")[0];
 
+  ///검색 이벤트
   const searchE = () => {
+    //map 돌면서 ref에 모든 캐릭터 정보가 들어감
     const update = (privacy: ObjectCharacter) => {
       organ.current = [...organ.current, privacy]
       // Ref에 쌓이고 렌더링이 일어날 수 있게 마지막에 렌더링시킴, 레벨순으로 정렬
@@ -25,10 +29,12 @@ function Main() {
           } else {
             return 0;
           }
-        })
+        });
+        //렌더링 설정
         setState(state + 1);
       }
     }
+    //입력한 캐릭터 검색
     input && fetch(`https://developer-lostark.game.onstove.com/characters/${input}/siblings`, {
       headers:{
         'accept':'application/json',
@@ -37,6 +43,7 @@ function Main() {
     })
     .then(res => res.json())
     .then(characters => {
+      //캐릭터 이름 검색한걸로 보유중인 캐릭터 전부 map돌려서 재검색 하면서 update함수 실행
       group(characters)
       characters.map(async(obj: CharacterName)=> {
         return await fetch(`https://developer-lostark.game.onstove.com/armories/characters/${obj.CharacterName}/profiles`,{
@@ -69,8 +76,7 @@ function Main() {
     body.style.height = "100vh";
     body.style.backgroundColor = "#15181d";
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[input])
-  console.log(organ)
+  },[input]);
   return (
     <div className="App">
       <header>
