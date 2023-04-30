@@ -1,5 +1,5 @@
 import React, { createContext, useRef, useState } from "react"
-import { Effects, Gems, ObjectCharacter } from "../type/typeContext"
+import { Effects, Gems, ObjectCharacter, Weapon } from "../type/typeContext"
 
 interface AppContextProps {
   elName: React.RefObject<HTMLInputElement>;
@@ -11,7 +11,9 @@ interface AppContextProps {
   effects: Effects | undefined;
   setEffects: React.Dispatch<React.SetStateAction<Effects | undefined>>;
   gems: Gems | undefined;
-  setGems: React.Dispatch<React.SetStateAction<Gems | undefined>>
+  setGems: React.Dispatch<React.SetStateAction<Gems | undefined>>;
+  weapon: Weapon | undefined;
+  setWeapon: React.Dispatch<React.SetStateAction<Weapon | undefined>>;
 }
 
 export const AppC = createContext<AppContextProps>({} as AppContextProps);
@@ -23,6 +25,7 @@ export const Context = ({children}: {children: JSX.Element}) => {
   const [char, setChar] = useState<ObjectCharacter>();
   const [effects, setEffects] = useState<Effects>();
   const [gems, setGems] = useState<Gems>()
+  const [weapon, setWeapon] = useState<Weapon>()
   
   const search: AppContextProps['search'] = (e) => {
     e.preventDefault();
@@ -34,7 +37,7 @@ export const Context = ({children}: {children: JSX.Element}) => {
     document.cookie = "crossCookie=bar; SameSite=None; Secure";
   }
 
-  const value = { elName, search, input, organ, char, setChar, effects, setEffects, gems, setGems };
+  const value = { elName, search, input, organ, char, setChar, effects, setEffects, gems, setGems, weapon, setWeapon };
 
   return (
     <AppC.Provider value={value}>

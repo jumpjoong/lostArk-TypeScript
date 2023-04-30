@@ -1,3 +1,4 @@
+//로스트아크 api 넘어올 때 대문자로 넘어옴
 export interface ObjectCharacter {
   CharacterClassName: string;
   CharacterImage?: string;
@@ -20,18 +21,26 @@ export interface ObjectCharacter {
 }
 
 export interface Effects {
-  Description: string;
-  GemSlot: number;
-  Icon: string;
-  Name: string;
-  Tooltip: string;
+  Description: string | null;
+  GemSlot: number | null;
+  Icon: string | null;
+  Name: string | null ;
+  Tooltip: string | null;
 }
 
 export interface Gems {
-  Grade: string;
-  Icon: string;
-  Level: number;
-  Name: string;
-  Slot: number;
-  Tooltip: number;
+  Grade: string | null;
+  Icon: string | null;
+  Level: number | null;
+  Name: string | null;
+  Slot: number | null;
+  Tooltip: number | null;
+}
+
+export interface Weapon {
+  Grade: string | null;
+  Icon: string | null;
+  Name: string | null;
+  Tooltip: string | null;
+  Type: string | null;
 }
