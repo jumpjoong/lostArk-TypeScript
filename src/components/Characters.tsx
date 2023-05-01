@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import { AppC } from "../context/Context";
 import { Effects } from "../type/typeContext";
 import List from "./List/List";
+import Gems from "./Gem/Gems";
 
 interface WarStats {
   Type: string;
@@ -14,9 +15,20 @@ interface BasicStats {
   Value: string;
 }
 
+interface Engra {
+  Effects: {
+    Description: string;
+    Name: string;
+  }[];
+  Engravings: {
+    Icon: string;
+    Name: string;
+    Slot: number
+  }[];
+}
 function Characters() {
   const name = useLocation();
-  const [engra, setEngra] = useState();
+  const [engra, setEngra] = useState<Engra>();
   const { char, setChar, setEffects, gems, setGems, weapon, setWeapon } = useContext(AppC);
   
   useEffect(() => {
@@ -71,25 +83,11 @@ function Characters() {
             .then(abc => {
               setWeapon(abc)
             })
-          } else {
-            setEffects(undefined);
-            setGems(undefined);
-            fetch(`https://developer-lostark.game.onstove.com/armories/characters/${name.state.name}/equipment`,{
-              headers:{
-                'accept':'application/json',
-                'authorization':'bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IktYMk40TkRDSTJ5NTA5NWpjTWk5TllqY2lyZyIsImtpZCI6IktYMk40TkRDSTJ5NTA5NWpjTWk5TllqY2lyZyJ9.eyJpc3MiOiJodHRwczovL2x1ZHkuZ2FtZS5vbnN0b3ZlLmNvbSIsImF1ZCI6Imh0dHBzOi8vbHVkeS5nYW1lLm9uc3RvdmUuY29tL3Jlc291cmNlcyIsImNsaWVudF9pZCI6IjEwMDAwMDAwMDAxMDQzNjkifQ.m8gzbGMVUWCWjtKflQzWnUCoPipdIBqaB5g60LJmr_DA505X6PrDMtTIsH9O_1DqXKdapyXzhs3kHrMgGl_FPlUsDSjkX9aYH2B77mUOLaNDUpqRHQOsIvWZz4Pi0-StkK4OLec0Av_B3VPUBqd4XGgOyrzTh8umEJB5q5hdjPkk0mfjxCflmuVWtxC9TYx-JvM50thbbZ8tcDWUIOUX7AExcGp7wlJ64SejlpD3VUscA3x21-3xxjDn1TjmjbE41-2K8nGHZsXIJ86MGEbZnzxDkECjhHyKtxvNbDUJySIP4qRlzmOiUQuXGopvt-zeEWyNYkDvep7iQ2jhNFaQlQ'
-              }
-            })
-            .then(res => res.json())
-            .then(abc => {
-              setWeapon(undefined);
-            })
           }
         })
       });
     });
   },[name]);
-
   let ws: WarStats[] = [];
   let bs: BasicStats[] = [];
   
@@ -105,7 +103,6 @@ function Characters() {
     }));
   }
 
-  console.log(char)
   return (
     <main className="second-main">
       <div className='char'>
@@ -223,7 +220,7 @@ function Characters() {
                 <div className="mococo">
                 <p>성향</p>
                   <div className="mococo-second">
-                    {/* {
+                    {
                       char && char.Tendencies.map((obj, key)=> {
                         return <div key={key}>
                           <p >
@@ -234,13 +231,13 @@ function Characters() {
                           </p>
                         </div>
                       })
-                    } */}
+                    }
                   </div>
                 </div>
                 <div className="engrave">
                 <p>각인 효과</p>
                   <div className="engrave-second">
-                    {/* {
+                    {
                       engra && engra.Effects.map((obj, key)=> {
                         return <div key={key}>
                           <p >
@@ -248,7 +245,7 @@ function Characters() {
                           </p>
                         </div>
                       })
-                    } */}
+                    }
                   </div>
                 </div>
               </div>
@@ -258,7 +255,7 @@ function Characters() {
         <div className="more">
           <div className="">
             <ul>
-              {/* <Gem /> */}
+              <Gems />
             </ul>
           </div>
         </div>

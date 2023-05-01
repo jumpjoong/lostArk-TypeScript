@@ -12,7 +12,11 @@ export interface ObjectCharacter {
   PvpGradeName?: string;
   ServerName: string;
   Stats: object[];
-  Tendencies: object[];
+  Tendencies: {
+    MaxPoint: number;
+    Point: number;
+    Type : string;
+  }[];
   Title?: string | null;
   TotalSkillPoint: number;
   TownLevel: number;
@@ -29,12 +33,21 @@ export interface Effects {
 }
 
 export interface Gems {
-  Grade: string | null;
-  Icon: string | null;
-  Level: number | null;
-  Name: string | null;
-  Slot: number | null;
-  Tooltip: number | null;
+  Effects: [{
+    Description: string | null;
+    GemSlot: number | null;
+    Icon: string | null;
+    Name: string | null;
+    Tooltip: string | null;
+  }] | null;
+  Gems: Array<{
+    Grade: string | null;
+    Icon: string | null;
+    Level: number | null;
+    Name: string | null | TrustedHTML;
+    Slot: number | null;
+    Tooltip: number | null;
+  }>;
 }
 
 export interface Weapon {
