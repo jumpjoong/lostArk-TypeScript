@@ -33,13 +33,13 @@ export interface Effects {
 }
 
 export interface Gems {
-  Effects: [{
+  Effects: {
     Description: string | null;
     GemSlot: number | null;
     Icon: string | null;
     Name: string | null;
     Tooltip: string | null;
-  }] | null;
+  }| null;
   Gems: Array<{
     Grade: string | null;
     Icon: string | null;

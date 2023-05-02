@@ -8,14 +8,16 @@ interface AppContextProps {
   organ: React.MutableRefObject<ObjectCharacter[]>;
   char: ObjectCharacter | undefined;
   setChar: React.Dispatch<React.SetStateAction<ObjectCharacter | undefined>>;
-  effects: Effects[] | null;
-  setEffects: React.Dispatch<React.SetStateAction<Effects[] | null>>;
+  effects: Effects[];
+  setEffects: React.Dispatch<React.SetStateAction<Effects[]>>;
   weapon: Weapon | undefined;
   setWeapon: React.Dispatch<React.SetStateAction<Weapon | undefined>>;
   gems: Gems;
   setGems:  React.Dispatch<React.SetStateAction<Gems>>
   legend: React.CSSProperties;
   hero: React.CSSProperties;
+  hide: boolean;
+  setHide: React.Dispatch<boolean>;
 }
 
 
@@ -26,15 +28,15 @@ export const Context = ({children}: {children: JSX.Element}) => {
   const [input, setInput] = useState<string>();
   const organ = useRef<ObjectCharacter[]>([]);
   const [char, setChar] = useState<ObjectCharacter>();
-  const [effects, setEffects] = useState<Effects[] | null>([]);
+  const [effects, setEffects] = useState<Effects[]>([{
+    Description: null,
+    GemSlot: null,
+    Icon: null,
+    Name: null,
+    Tooltip: null,
+  }]);
   const [gems, setGems] = useState<Gems>({
-    Effects: [{
-      Description: null,
-      GemSlot: null,
-      Icon: null,
-      Name: null ,
-      Tooltip: null
-    }],
+    Effects: null,
     Gems: [{
       Grade:  null,
       Icon:  null,
@@ -45,6 +47,7 @@ export const Context = ({children}: {children: JSX.Element}) => {
     }]
   });
   const [weapon, setWeapon] = useState<Weapon>()
+  const [hide, setHide] = useState(false)
   
   const legend = { //전설 백그라운드
     background : 'linear-gradient(135deg, #362003, #9e5f04)'
@@ -63,7 +66,7 @@ export const Context = ({children}: {children: JSX.Element}) => {
     document.cookie = "crossCookie=bar; SameSite=None; Secure";
   }
 
-  const value = { elName, search, input, organ, char, setChar, effects, setEffects, gems, setGems, weapon, setWeapon, legend, hero };
+  const value = { elName, search, input, organ, char, setChar, effects, setEffects, gems, setGems, weapon, setWeapon, legend, hero, setHide, hide };
 
   return (
     <AppC.Provider value={value}>

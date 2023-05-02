@@ -29,7 +29,7 @@ interface Engra {
 function Characters() {
   const name = useLocation();
   const [engra, setEngra] = useState<Engra>();
-  const { char, setChar, setEffects, gems, setGems, weapon, setWeapon } = useContext(AppC);
+  const { char, setChar, setEffects, gems, setGems, weapon, setWeapon, hide, setHide } = useContext(AppC);
   
   useEffect(() => {
     name && fetch(`https://developer-lostark.game.onstove.com/armories/characters/${name.state.name}/profiles`,{
@@ -61,14 +61,12 @@ function Characters() {
         })
         .then(res=>res.json())
         .then(gem => {
-          //보유중인 보석, 보석 상세 정보
+          //보석 정보
           if (gem !== null) {
-            setEffects(abc.Effects.sort((a: Effects, b: Effects) => { 
-              if(abc) {
-                if (a.GemSlot && b.GemSlot) {
-                  if (a.GemSlot < b.GemSlot) {
-                    return -1;
-                  }
+            setEffects(gem.Effects.sort((a: Effects, b: Effects) => { 
+              if (a.GemSlot && b.GemSlot) {
+                if (a.GemSlot < b.GemSlot) {
+                  return -1;
                 }
               }
             }))
@@ -102,7 +100,10 @@ function Characters() {
       Value: obj.Value,
     }));
   }
-
+  //더보기 컨트롤
+  const more = () => {
+    setHide(!hide)
+  }
   return (
     <main className="second-main">
       <div className='char'>
@@ -261,10 +262,10 @@ function Characters() {
         </div>
         <div className="weapon-wrap">
           <div className="wrap">
-            {/* <div className="see">
+            <div className="see">
               <button className="w" onClick={more}><p>더보기</p></button>
             </div>
-            <Weapon /> */}
+            {/* <Weapon /> */}
           </div>
         </div>
       </div>
