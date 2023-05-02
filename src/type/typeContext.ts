@@ -39,7 +39,7 @@ export interface Gems {
     Icon: string | null;
     Name: string | null;
     Tooltip: string | null;
-  }| null;
+  };
   Gems: Array<{
     Grade: string | null;
     Icon: string | null;

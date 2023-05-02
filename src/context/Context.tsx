@@ -10,8 +10,8 @@ interface AppContextProps {
   setChar: React.Dispatch<React.SetStateAction<ObjectCharacter | undefined>>;
   effects: Effects[];
   setEffects: React.Dispatch<React.SetStateAction<Effects[]>>;
-  weapon: Weapon | undefined;
-  setWeapon: React.Dispatch<React.SetStateAction<Weapon | undefined>>;
+  weapon: Weapon[] | undefined;
+  setWeapon: React.Dispatch<React.SetStateAction<Weapon[]>>;
   gems: Gems;
   setGems:  React.Dispatch<React.SetStateAction<Gems>>
   legend: React.CSSProperties;
@@ -52,7 +52,7 @@ export const Context = ({children}: {children: JSX.Element}) => {
       Tooltip:  null,
     }]
   });
-  const [weapon, setWeapon] = useState<Weapon>()
+  const [weapon, setWeapon] = useState<Weapon[]>([])
   const [hide, setHide] = useState(false)
   
   const legend = { //전설 백그라운드

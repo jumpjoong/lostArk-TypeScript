@@ -4,6 +4,7 @@ import { AppC } from "../context/Context";
 import { Effects } from "../type/typeContext";
 import List from "./List/List";
 import Gems from "./Gem/Gems";
+import Weapons from "./Weapon/Weapons";
 
 interface WarStats {
   Type: string;
@@ -29,7 +30,7 @@ interface Engra {
 function Characters() {
   const name = useLocation();
   const [engra, setEngra] = useState<Engra>();
-  const { char, setChar, setEffects, gems, setGems, weapon, setWeapon, hide, setHide } = useContext(AppC);
+  const { char, setChar, setEffects, setGems, setWeapon, hide, setHide } = useContext(AppC);
   
   useEffect(() => {
     name && fetch(`https://developer-lostark.game.onstove.com/armories/characters/${name.state.name}/profiles`,{
@@ -265,7 +266,7 @@ function Characters() {
             <div className="see">
               <button className="w" onClick={more}><p>더보기</p></button>
             </div>
-            {/* <Weapon /> */}
+            <Weapons />
           </div>
         </div>
       </div>
