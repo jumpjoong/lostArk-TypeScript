@@ -2,13 +2,16 @@ import { useContext, useRef } from "react"
 import { AppC } from "../../context/Context"
 function Weapons() {
   const {weapon, hide} = useContext(AppC);
-  const ccc = useRef([])
+  const ccc = useRef<object[]>([])
   const num = [];
   const filt = weapon && weapon.filter((item)=> item.Type !== '')
   const abil = weapon && weapon.filter((item)=> item.Type == "어빌리티 스톤")
-  const abilTip = abil && JSON.parse(abil[0]?.Tooltip ?? "")
+  // const abilTip = abil && JSON.parse(abil[0]?.Tooltip ?? "")
+  if (abil !== undefined) {
+    // console.log(typeof abil[0].Tooltip, "헤헤")
+    JSON.stringify(abil[0]?.Tooltip ?? "")
+  }
 
-  console.log(typeof filt)
   const changeArrayOrder = function(list: object[], targetIdx: number, moveValue: number) {
     // 배열값이 없는 경우 나가기
     if (list.length < 0) return;
@@ -45,7 +48,6 @@ function Weapons() {
   //     ccc.current = [...ccc.current, JSON.parse(list7[i].Tooltip)]
   //   }
   // }
-  console.log(JSON.parse(list7))
   // 각인 활성화 이미지
   // let bb = [];
   // let cc = [];
