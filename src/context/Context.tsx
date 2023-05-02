@@ -36,7 +36,13 @@ export const Context = ({children}: {children: JSX.Element}) => {
     Tooltip: null,
   }]);
   const [gems, setGems] = useState<Gems>({
-    Effects: null,
+    Effects: {
+      Description: null,
+      GemSlot: null,
+      Icon: null,
+      Name: null,
+      Tooltip: null,
+    },
     Gems: [{
       Grade:  null,
       Icon:  null,
