@@ -82,6 +82,47 @@ function Characters() {
             .then(abc => {
               setWeapon(abc)
             })
+          } else {
+            setEffects([{
+              Description: null,
+              GemSlot: null,
+              Icon: null,
+              Name: null,
+              Tooltip: null,
+            }])
+            setGems({
+              Effects: {
+                Description: null,
+                GemSlot: null,
+                Icon: null,
+                Name: null,
+                Tooltip: null,
+              },
+              Gems: [{
+                Grade:  null,
+                Icon:  null,
+                Level:  null,
+                Name:  null,
+                Slot:  null,
+                Tooltip:  null,
+              }]
+            });
+            fetch(`https://developer-lostark.game.onstove.com/armories/characters/${name.state.name}/equipment`,{
+              headers:{
+              'accept':'application/json',
+              'authorization':'bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IktYMk40TkRDSTJ5NTA5NWpjTWk5TllqY2lyZyIsImtpZCI6IktYMk40TkRDSTJ5NTA5NWpjTWk5TllqY2lyZyJ9.eyJpc3MiOiJodHRwczovL2x1ZHkuZ2FtZS5vbnN0b3ZlLmNvbSIsImF1ZCI6Imh0dHBzOi8vbHVkeS5nYW1lLm9uc3RvdmUuY29tL3Jlc291cmNlcyIsImNsaWVudF9pZCI6IjEwMDAwMDAwMDAxMDQzNjkifQ.m8gzbGMVUWCWjtKflQzWnUCoPipdIBqaB5g60LJmr_DA505X6PrDMtTIsH9O_1DqXKdapyXzhs3kHrMgGl_FPlUsDSjkX9aYH2B77mUOLaNDUpqRHQOsIvWZz4Pi0-StkK4OLec0Av_B3VPUBqd4XGgOyrzTh8umEJB5q5hdjPkk0mfjxCflmuVWtxC9TYx-JvM50thbbZ8tcDWUIOUX7AExcGp7wlJ64SejlpD3VUscA3x21-3xxjDn1TjmjbE41-2K8nGHZsXIJ86MGEbZnzxDkECjhHyKtxvNbDUJySIP4qRlzmOiUQuXGopvt-zeEWyNYkDvep7iQ2jhNFaQlQ'
+              }
+            })
+            .then(res => res.json())
+            .then(abc => {
+              setWeapon([{
+                Grade: null,
+                Icon: null,
+                Name: null,
+                Tooltip: null,
+                Type: null,
+              }])
+            })
           }
         })
       });
