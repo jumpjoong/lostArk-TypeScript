@@ -4,7 +4,8 @@ import { Effects, Gems, ObjectCharacter, Weapon } from "../type/typeContext"
 interface AppContextProps {
   elName: React.RefObject<HTMLInputElement>;
   search: (e: React.FormEvent<HTMLFormElement>) => void;
-  input?: string;
+  setInput: React.Dispatch<React.SetStateAction<string | null>>;
+  input: string | null;
   organ: React.MutableRefObject<ObjectCharacter[]>;
   char: ObjectCharacter | undefined;
   setChar: React.Dispatch<React.SetStateAction<ObjectCharacter | undefined>>;
@@ -25,7 +26,7 @@ export const AppC = createContext<AppContextProps>({} as AppContextProps);
 
 export const Context = ({children}: {children: JSX.Element}) => {
   const elName = useRef<HTMLInputElement>(null);
-  const [input, setInput] = useState<string>();
+  const [input, setInput] = useState<string | null>(null);
   const organ = useRef<ObjectCharacter[]>([]);
   const [char, setChar] = useState<ObjectCharacter>();
   const [effects, setEffects] = useState<Effects[]>([{
@@ -54,7 +55,6 @@ export const Context = ({children}: {children: JSX.Element}) => {
   });
   const [weapon, setWeapon] = useState<Weapon[]>([])
   const [hide, setHide] = useState(false)
-  
   const legend = { //전설 백그라운드
     background : 'linear-gradient(135deg, #362003, #9e5f04)'
   };
@@ -72,7 +72,7 @@ export const Context = ({children}: {children: JSX.Element}) => {
     document.cookie = "crossCookie=bar; SameSite=None; Secure";
   }
 
-  const value = { elName, search, input, organ, char, setChar, effects, setEffects, gems, setGems, weapon, setWeapon, legend, hero, setHide, hide };
+  const value = { setInput, elName, search, input, organ, char, setChar, effects, setEffects, gems, setGems, weapon, setWeapon, legend, hero, setHide, hide };
 
   return (
     <AppC.Provider value={value}>
