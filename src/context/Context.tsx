@@ -11,7 +11,7 @@ interface AppContextProps {
   setChar: React.Dispatch<React.SetStateAction<ObjectCharacter | undefined>>;
   effects: Effects[];
   setEffects: React.Dispatch<React.SetStateAction<Effects[]>>;
-  weapon: Weapon[] | undefined;
+  weapon: Weapon[];
   setWeapon: React.Dispatch<React.SetStateAction<Weapon[]>>;
   gems: Gems;
   setGems:  React.Dispatch<React.SetStateAction<Gems>>

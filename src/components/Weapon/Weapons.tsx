@@ -6,11 +6,8 @@ function Weapons() {
   const num = [];
   const filt = weapon && weapon.filter((item)=> item.Type !== '')
   const abil = weapon && weapon.filter((item)=> item.Type == "어빌리티 스톤")
-  // const abilTip = abil && JSON.parse(abil[0]?.Tooltip ?? "")
-  if (abil !== undefined) {
-    // console.log(typeof abil[0].Tooltip, "헤헤")
-    JSON.stringify(abil[0]?.Tooltip ?? "")
-  }
+  //2일 째 고생하다 마음 꺾이기 전에 현업 친구한테 물어본 코드...그것은 바로 깊은 복제란다...
+  const abilTip = abil[0]?.Tooltip && JSON.parse(JSON.parse(JSON.stringify(abil[0]?.Tooltip)))
 
   const changeArrayOrder = function(list: object[], targetIdx: number, moveValue: number) {
     // 배열값이 없는 경우 나가기
@@ -43,23 +40,23 @@ function Weapons() {
   let list7 = list6 && changeArrayOrder(list6, 8, -1)
 
   // 품질 숫자 따오기
-  // if (list7 !== undefined) {
-  //   for (let i = 0; i < list7.length; i++) {
-  //     ccc.current = [...ccc.current, JSON.parse(list7[i].Tooltip)]
-  //   }
-  // }
+  if (list7 !== undefined) {
+    for (let i = 0; i < list7.length; i++) {
+      ccc.current = [...ccc.current, JSON.parse(list7[i].Tooltip)]
+    }
+  }
   // 각인 활성화 이미지
-  // let bb = [];
-  // let cc = [];
-  // let abilActive;
-  // bb = abil && Object.keys(abilTip)
-  
+  let bb = [];
+  let cc:object[] = [];
+  let abilActive;
+  bb = abilTip && Object.keys(abilTip)
+
   // 툴팁 
-  // if (bb !== undefined) {
-  //   for (let i = 0; i < bb.length; i++) { 
-  //     cc = [...cc, (abilTip[bb[i]])]
-  //   }
-  // }
+  if (abilTip !== undefined && abilTip !== null) {
+    for (let i = 0; i < bb.length; i++) { 
+      cc = [...cc, (abilTip[bb[i]])]
+    }
+  }
   // 어빌리티스톤 찾아내기
   // if (cc.length == 10 || cc.length == 9) {
   //   abilActive = cc && cc.filter((item)=> item.type == "IndentStringGroup")
