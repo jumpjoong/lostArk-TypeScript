@@ -1,5 +1,9 @@
 import { useContext, useRef } from "react"
 import { AppC } from "../../context/Context"
+interface ddd {
+  type: string ,
+  value: string
+}
 function Weapons() {
   const {weapon, hide} = useContext(AppC);
   const ccc = useRef<object[]>([])
@@ -7,6 +11,7 @@ function Weapons() {
   const filt = weapon && weapon.filter((item)=> item.Type !== '')
   const abil = weapon && weapon.filter((item)=> item.Type == "어빌리티 스톤")
   //2일 째 고생하다 마음 꺾이기 전에 현업 친구한테 물어본 코드...그것은 바로 깊은 복제란다...
+  //겨우 한 줄로 며칠을 고생한거야...
   const abilTip = abil[0]?.Tooltip && JSON.parse(JSON.parse(JSON.stringify(abil[0]?.Tooltip)))
 
   const changeArrayOrder = function(list: object[], targetIdx: number, moveValue: number) {
@@ -47,24 +52,29 @@ function Weapons() {
   }
   // 각인 활성화 이미지
   let bb = [];
-  let cc:object[] = [];
-  let abilActive;
+  let cc:ddd[] = [];
+  let abilActive:ddd | undefined;
   bb = abilTip && Object.keys(abilTip)
+  
 
   // 툴팁 
-  if (abilTip !== undefined && abilTip !== null) {
+  if (abilTip) {
     for (let i = 0; i < bb.length; i++) { 
       cc = [...cc, (abilTip[bb[i]])]
     }
   }
   // 어빌리티스톤 찾아내기
-  // if (cc.length == 10 || cc.length == 9) {
-  //   abilActive = cc && cc.filter((item)=> item.type == "IndentStringGroup")
-  // }
+  if (cc.length === 10 || cc.length === 9) {
+    abilActive = cc.find((item: ddd) => item.type === "IndentStringGroup");
+  }
+  abilActive && console.log(abilActive)
+  
   // 어빌리티스톤 상세하게 들어가기
   // let abilNum = [];
   // let abilEff = [];
-  // bb && abilNum.push(abilActive[0].value.Element_000.contentStr)
+  // if (abilActive) {
+  //   abilNum.push(abilActive[0].value.Element_000.contentStr)
+  // }
   
   // 어빌리티 스톤 숫자 자르기
   // for(let i = 0; i < 3; i++){
