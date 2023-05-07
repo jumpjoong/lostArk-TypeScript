@@ -4,7 +4,6 @@ import { Effects, Gems, ObjectCharacter, Weapon } from "../type/typeContext"
 interface AppContextProps {
   elName: React.RefObject<HTMLInputElement>;
   search: (e: React.FormEvent<HTMLFormElement>) => void;
-  setInput: React.Dispatch<React.SetStateAction<string | null>>;
   input: string | null;
   organ: React.MutableRefObject<ObjectCharacter[]>;
   char: ObjectCharacter | undefined;
@@ -19,6 +18,14 @@ interface AppContextProps {
   hero: React.CSSProperties;
   hide: boolean;
   setHide: React.Dispatch<boolean>;
+  relics: React.CSSProperties;
+  old: React.CSSProperties;
+  esther: React.CSSProperties;
+  oldColor: React.CSSProperties;
+  heroColor: React.CSSProperties;
+  legendColor: React.CSSProperties;
+  relicsColor: React.CSSProperties;
+  estherColor: React.CSSProperties;
 }
 
 
@@ -61,6 +68,30 @@ export const Context = ({children}: {children: JSX.Element}) => {
   const hero = {  //영웅 백그라운드
     background : 'linear-gradient(135deg, #261331, #480d5d)'
   }
+  const relics = {  //유물 백그라운드
+    background : 'linear-gradient(135deg, #341a09, #a24006)'
+  }
+  const old = {     //고대 백그라운드
+    background : 'linear-gradient(135deg, #3d3325, #dcc999)'
+  }
+  const esther = {  //에스더 백그라운드
+    background : 'linear-gradient(135deg,#0c2e2c,#2faba8)'
+  }
+  const oldColor = {
+    color : '#dcc999'
+  }
+  const legendColor = {
+    color :  '#9e5f04'
+  }
+  const heroColor = {
+    color :  '#480d5d'
+  }
+  const relicsColor = {
+    color :  '#a24006'
+  }
+  const estherColor = {
+    color : '#2faba8'
+  }
 
   const search: AppContextProps['search'] = (e) => {
     e.preventDefault();
@@ -72,7 +103,7 @@ export const Context = ({children}: {children: JSX.Element}) => {
     document.cookie = "crossCookie=bar; SameSite=None; Secure";
   }
 
-  const value = { setInput, elName, search, input, organ, char, setChar, effects, setEffects, gems, setGems, weapon, setWeapon, legend, hero, setHide, hide };
+  const value = { char, setChar, gems, setGems, effects, setEffects, weapon, setWeapon, hide, setHide,estherColor, relicsColor, heroColor, legendColor, oldColor, esther, old, relics, hero, legend, organ, elName, search, input };
 
   return (
     <AppC.Provider value={value}>
