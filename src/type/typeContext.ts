@@ -57,3 +57,45 @@ export interface Weapon {
   Tooltip: string | null;
   Type: string | null;
 }
+
+export interface AblillityStoneDetail {
+  type: string ,
+  value: AblillityStoneDetailValue
+}
+
+export interface QualityCurrent {
+  Element_001: QualityCurrentDetail,
+  Element_002: QualityCurrentDetail,
+  Element_003: QualityCurrentDetail,
+  Element_004: QualityCurrentDetail,
+  [key: string]: QualityCurrentDetail
+}
+
+type AblillityStoneDetailValue = {
+  Element_000: ContentStr
+}
+
+type ContentStr = {
+  contentStr: ElementNumber
+}
+
+type ElementNumber = {
+  Element_001: object,
+  Element_002: object,
+  Element_003: object
+  [key: string]: any
+}
+
+type QualityCurrentDetail = {
+  type: string,
+  value: QualityCurrentDetailValue
+}
+
+type QualityCurrentDetailValue = {
+  leftStr0: string,
+  leftStr1: string,
+  leftStr2: string,
+  qualityValue: number,
+  rightStr0: string,
+  slotData: object
+}

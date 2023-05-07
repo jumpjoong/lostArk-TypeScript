@@ -32,10 +32,15 @@ interface AppContextProps {
 export const AppC = createContext<AppContextProps>({} as AppContextProps);
 
 export const Context = ({children}: {children: JSX.Element}) => {
+  //input 창에 입력되는 텍스트 (Insert.tsx, Main.tsx, )
   const elName = useRef<HTMLInputElement>(null);
+  //입력창에 입력된 값(Main.tsx)
   const [input, setInput] = useState<string | null>(null);
+  //보유중인 캐릭터 그룹 (Group.tsx, Main.tsx, List.tsx)
   const organ = useRef<ObjectCharacter[]>([]);
+  //입력한 캐릭터 정보 (Characters.tsx, List.tsx)
   const [char, setChar] = useState<ObjectCharacter>();
+  //보유중인 보석 정보(ex.보석 이름, 보석 효과) (Gem.tsx)
   const [effects, setEffects] = useState<Effects[]>([{
     Description: null,
     GemSlot: null,
@@ -43,6 +48,7 @@ export const Context = ({children}: {children: JSX.Element}) => {
     Name: null,
     Tooltip: null,
   }]);
+  //보유중인 보석 (Gems.tsx)
   const [gems, setGems] = useState<Gems>({
     Effects: {
       Description: null,
@@ -60,7 +66,9 @@ export const Context = ({children}: {children: JSX.Element}) => {
       Tooltip:  null,
     }]
   });
+  //보유중인 장비 (Weapon.tsx)
   const [weapon, setWeapon] = useState<Weapon[]>([])
+  //더보기 컨트롤(Weapon.tsx)
   const [hide, setHide] = useState(false)
   const legend = { //전설 백그라운드
     background : 'linear-gradient(135deg, #362003, #9e5f04)'
@@ -92,7 +100,7 @@ export const Context = ({children}: {children: JSX.Element}) => {
   const estherColor = {
     color : '#2faba8'
   }
-
+  
   const search: AppContextProps['search'] = (e) => {
     e.preventDefault();
     if (elName.current) {
