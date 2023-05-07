@@ -5,8 +5,9 @@ import { Weapon, QualityCurrent, AblillityStoneDetail } from "../../type/typeCon
 function Weapons() {
   const { weapon, hide, legend, hero, relics,legendColor, heroColor, relicsColor, old, oldColor, estherColor, esther } = useContext(AppC);
   const qualityNumber = useRef<QualityCurrent[]>([])
-  const num: string[] = [];
+  //장비 찾기
   const filt = weapon && weapon.filter((item)=> item.Type !== '')
+  //어빌리티 스톤 찾기
   const abil = weapon && weapon.filter((item)=> item.Type == "어빌리티 스톤")
   //2일 째 고생하다 마음 꺾이기 전에 현업 친구한테 물어본 코드...그것은 바로 깊은 복제란다...
   //겨우 한 줄로 며칠을 고생한거야...
@@ -78,7 +79,6 @@ function Weapons() {
       abilEff.push(abilDetail.slice(abilDetail.indexOf('+')+1,abilDetail.lastIndexOf('<')))
     }
   }
-
   return (
     <div className={hide ? "eq show" : "eq noShow"}>
       <div className="weapon">
@@ -197,7 +197,6 @@ function Weapons() {
                 return <div key={key} className={`eq-weapon ${key}`} >
                   <figure>
                     <img src={`${obj.Icon}`} alt="이미지" style={legend}/>
-                    <p>{num}</p>
                   </figure>
                   <div>
                     <p>{obj.Type}</p>
@@ -301,7 +300,6 @@ function Weapons() {
                 return <div key={key} className={`eq-weapon ${key}`} >
                   <figure>
                     <img src={`${obj.Icon}`} alt="이미지" style={old}/>
-                    <p>{num}</p>
                   </figure>
                   <div>
                     <p>{obj.Type}</p>
@@ -405,7 +403,6 @@ function Weapons() {
                 return <div key={key} className={`eq-weapon ${key}`} >
                 <figure>
                   <img src={`${obj.Icon}`} alt="이미지" style={esther}/>
-                  <p>{num}</p>
                 </figure>
                 <div>
                   <p>{obj.Type}</p>
@@ -509,7 +506,6 @@ function Weapons() {
                 return <div key={key} className={`eq-weapon ${key}`} >
                   <figure>
                     <img src={`${obj.Icon}`} alt="이미지" style={relics}/>
-                    <p>{num}</p>
                   </figure>
                   <div>
                     <p>{obj.Type}</p>
