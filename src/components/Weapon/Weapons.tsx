@@ -42,8 +42,9 @@ function Weapons() {
   let list4 = list3 && changeArrayOrder(list3, 5, -3)
   let list5 = list4 && changeArrayOrder(list4, 6, -3)
   let list6 = list5 && changeArrayOrder(list5, 7, -2)
-  let list7:Weapon[] = list6 && changeArrayOrder(list6, 8, -1)
-
+  let list7:Weapon[]  = list6 && changeArrayOrder(list6, 8, -1)
+  // let list8:Weapon[]  = list7 && list7.map((item:Weapon) => item.Type !== "팔찌" && item.Type !== "나침반" && item.Type !== "부적");
+  list7 && console.log(list7)
   // 품질 숫자 따오기
   if (list7 !== undefined) {
     for (let i = 0; i < list7.length; i++) {
@@ -56,13 +57,13 @@ function Weapons() {
   let abilActive;
   bb = abilTip && Object.keys(abilTip)
   
-
   // 툴팁 
   if (abilTip) {
     for (let i = 0; i < bb.length; i++) { 
       ablillityStoneDetail = [...ablillityStoneDetail, (abilTip[bb[i]])]
     }
   }
+
   // 어빌리티스톤 찾아내기
   if (ablillityStoneDetail.length === 10 || ablillityStoneDetail.length === 9) {
     abilActive = ablillityStoneDetail.find((item: AblillityStoneDetail) => item.type === "IndentStringGroup");
@@ -71,11 +72,12 @@ function Weapons() {
   // // 어빌리티스톤 상세하게 들어가기
   let abilNum = [];
   let abilEff:string[] = [];
+  let abilDetail
   if (abilActive) {
     abilNum.push(abilActive.value.Element_000.contentStr)
     // 어빌리티 스톤 활성화 숫자 자르기
     for(let i = 0; i < 3; i++){
-      let abilDetail = bb && abilActive.value.Element_000.contentStr[`Element_00${i}`].contentStr
+      abilDetail = bb && abilActive.value.Element_000.contentStr[`Element_00${i}`].contentStr
       abilEff.push(abilDetail.slice(abilDetail.indexOf('+')+1,abilDetail.lastIndexOf('<')))
     }
   }
@@ -84,6 +86,7 @@ function Weapons() {
       <div className="weapon">
         {
           list7 && list7.map((obj, key)=> {
+          if (obj.Type !== "팔찌" && obj.Type !== "나침반" && obj.Type !== "부적") {
             if (obj.Grade === "유물") {
               if (qualityNumber.current[key].Element_001.value.qualityValue == -1) {
                 return <div key={key} className={`eq-weapon ${key}`} >
@@ -605,6 +608,7 @@ function Weapons() {
                 </div>
               }
             }
+          }
           })
         }
       </div>

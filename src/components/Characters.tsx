@@ -146,6 +146,7 @@ function Characters() {
   const more = () => {
     setHide(!hide)
   }
+  
   return (
     <main className="second-main">
       <div className='char'>
