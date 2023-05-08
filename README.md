@@ -3,7 +3,10 @@
 👇👇👇👇👇👇👇👇
 
 [프로젝트 접속하기](http://khj0196.dothome.co.kr)
+
 //배포 새로운 곳에서 해야함
+
+
 👆👆👆👆👆👆👆👆
 
 <br/>
@@ -45,9 +48,11 @@
 <br/>
 
 ## 📍 사용한 기술 스택
-| REACT | SCSS | TS |
+| REACT | SCSS | TypeScript |
 |:---:|:---:|:---:|
-| ![react](https://user-images.githubusercontent.com/100519998/227874284-72192c04-3f8b-4ae7-94d8-de30a043166a.svg)| ![sass](https://user-images.githubusercontent.com/100519998/227877981-7552edea-b3d7-401b-9500-468e56285567.svg) |![typescript](https://user-images.githubusercontent.com/100519998/236754061-0bc92683-d8eb-484e-9224-497e7275aebb.svg)
+| ![react](https://user-images.githubusercontent.com/100519998/227874284-72192c04-3f8b-4ae7-94d8-de30a043166a.svg)| ![sass](https://user-images.githubusercontent.com/100519998/227877981-7552edea-b3d7-401b-9500-468e56285567.svg) | ![typescript_original_logo_icon_146317 1](https://user-images.githubusercontent.com/100519998/236756423-b93db12f-fd51-4772-b12c-67a088561f59.svg)
+
+
 
 
 <br/>
