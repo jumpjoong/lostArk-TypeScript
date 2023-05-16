@@ -40,14 +40,14 @@ export interface Gems {
     Name: string | null;
     Tooltip: string | null;
   };
-  Gems: Array<{
+  Gems: [{
     Grade: string | null;
     Icon: string | null;
     Level: number | null;
     Name: string | null | TrustedHTML;
     Slot: number | null;
     Tooltip: number | null;
-  }>;
+  }];
 }
 
 export interface Weapon {

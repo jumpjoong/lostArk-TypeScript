@@ -30,7 +30,7 @@ interface Engra {
 function Characters() {
   const name = useLocation();
   const [engra, setEngra] = useState<Engra>();
-  const { char, setChar, setEffects, setGems, setWeapon, hide, setHide } = useContext(AppC);
+  const { gems, char, setChar, setEffects, setGems, setWeapon, hide, setHide } = useContext(AppC);
   
   useEffect(() => {
     name && fetch(`https://developer-lostark.game.onstove.com/armories/characters/${name.state.name}/profiles`,{
@@ -299,7 +299,11 @@ function Characters() {
         <div className="more">
           <div className="">
             <ul>
-              <Gems />
+            {
+                gems && gems.Gems.map((obj, key) => {
+                  return <Gems key={key} idx={obj.Slot} obj={obj}/>
+                })
+              }
             </ul>
           </div>
         </div>

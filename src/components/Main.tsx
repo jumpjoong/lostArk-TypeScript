@@ -80,6 +80,7 @@ function Main() {
     body.style.height = "100vh";
     body.style.backgroundColor = "#15181d";
   },[input]);
+  
   return (
     <div className="App">
       <header>

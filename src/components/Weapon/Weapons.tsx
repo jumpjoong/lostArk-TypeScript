@@ -43,8 +43,6 @@ function Weapons() {
   let list5 = list4 && changeArrayOrder(list4, 6, -3)
   let list6 = list5 && changeArrayOrder(list5, 7, -2)
   let list7:Weapon[]  = list6 && changeArrayOrder(list6, 8, -1)
-  // let list8:Weapon[]  = list7 && list7.map((item:Weapon) => item.Type !== "팔찌" && item.Type !== "나침반" && item.Type !== "부적");
-  list7 && console.log(list7)
   // 품질 숫자 따오기
   if (list7 !== undefined) {
     for (let i = 0; i < list7.length; i++) {
