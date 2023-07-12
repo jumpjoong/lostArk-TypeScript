@@ -12,8 +12,8 @@ interface AppContextProps {
   setEffects: React.Dispatch<React.SetStateAction<Effects[]>>;
   weapon: Weapon[];
   setWeapon: React.Dispatch<React.SetStateAction<Weapon[]>>;
-  gems: Gems;
-  setGems:  React.Dispatch<React.SetStateAction<Gems>>
+  gems: Gems[];
+  setGems:  React.Dispatch<React.SetStateAction<Gems[]>>
   legend: React.CSSProperties;
   hero: React.CSSProperties;
   hide: boolean;
@@ -49,23 +49,22 @@ export const Context = ({children}: {children: JSX.Element}) => {
     Tooltip: null,
   }]);
   //보유중인 보석 (Gems.tsx)
-  const [gems, setGems] = useState<Gems>({
-    Effects: {
-      Description: null,
-      GemSlot: null,
-      Icon: null,
-      Name: null,
-      Tooltip: null,
-    },
-    Gems: [{
-      Grade:  null,
-      Icon:  null,
-      Level:  null,
-      Name:  null,
-      Slot:  null,
-      Tooltip:  null,
-    }]
-  });
+  const [gems, setGems] = useState<Gems[]>([{
+    // Effects: {
+    //   Description: null,
+    //   GemSlot: null,
+    //   Icon: null,
+    //   Name: null,
+    //   Tooltip: null,
+    // },
+    Grade:  null,
+    Icon:  null,
+    Level:  null,
+    Name:  null,
+    Slot:  null,
+    Tooltip:  null,
+  }]);
+  console.log(gems)
   //보유중인 장비 (Weapon.tsx)
   const [weapon, setWeapon] = useState<Weapon[]>([])
   //더보기 컨트롤(Weapon.tsx)
@@ -110,9 +109,8 @@ export const Context = ({children}: {children: JSX.Element}) => {
     document.cookie = "safeCookie2=foo";  
     document.cookie = "crossCookie=bar; SameSite=None; Secure";
   }
-
   const value = { char, setChar, gems, setGems, effects, setEffects, weapon, setWeapon, hide, setHide,estherColor, relicsColor, heroColor, legendColor, oldColor, esther, old, relics, hero, legend, organ, elName, search, input };
-
+  
   return (
     <AppC.Provider value={value}>
       {children}

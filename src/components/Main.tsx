@@ -46,7 +46,7 @@ function Main() {
       //캐릭터 이름 검색한걸로 보유중인 캐릭터 전부 map돌려서 재검색 하면서 update함수 실행
       group(characters)
       try {
-        characters.map(async(obj: CharacterName)=> {
+        characters.map(async(obj: CharacterName) => {
           return await fetch(`https://developer-lostark.game.onstove.com/armories/characters/${obj.CharacterName}/profiles`,{
               headers:{
                 'accept':'application/json',
@@ -75,12 +75,12 @@ function Main() {
   }
   //인풋의 값이 바뀌면 img길이 초기화하고 searchE 실행
   useEffect(() => {
-    organ.current = []
     searchE();
     body.style.height = "100vh";
     body.style.backgroundColor = "#15181d";
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   },[input]);
-  
+
   return (
     <div className="App">
       <header>

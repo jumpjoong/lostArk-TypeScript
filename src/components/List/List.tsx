@@ -10,7 +10,6 @@ function List() {
     const list = () => {
       setDrop(!drop);
     }
-  
   return (
     <div className='name'>
       {organ !== undefined && 

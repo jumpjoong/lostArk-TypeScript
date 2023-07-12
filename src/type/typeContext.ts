@@ -33,21 +33,19 @@ export interface Effects {
 }
 
 export interface Gems {
-  Effects: {
-    Description: string | null;
-    GemSlot: number | null;
-    Icon: string | null;
-    Name: string | null;
-    Tooltip: string | null;
-  };
-  Gems: [{
-    Grade: string | null;
-    Icon: string | null;
-    Level: number | null;
-    Name: string | null | TrustedHTML;
-    Slot: number | null;
-    Tooltip: number | null;
-  }];
+  // Effects: {
+  //   Description: string | null;
+  //   GemSlot: number | null;
+  //   Icon: string | null;
+  //   Name: string | null;
+  //   Tooltip: string | null;
+  // };
+  Grade: string | null;
+  Icon: string | null;
+  Level: number | null;
+  Name: string | null | TrustedHTML;
+  Slot: number | null;
+  Tooltip: number | null;
 }
 
 export interface Weapon {

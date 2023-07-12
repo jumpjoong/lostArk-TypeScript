@@ -27,11 +27,21 @@ interface Engra {
     Slot: number
   }[];
 }
+
+interface Levels {
+  
+  Grade: string | null;
+  Icon: string | null;
+  Level: number | null;
+  Name: string | null | TrustedHTML;
+  Slot: number | null;
+  Tooltip: number | null;
+};
+
 function Characters() {
   const name = useLocation();
   const [engra, setEngra] = useState<Engra>();
   const { gems, char, setChar, setEffects, setGems, setWeapon, hide, setHide } = useContext(AppC);
-  
   useEffect(() => {
     name && fetch(`https://developer-lostark.game.onstove.com/armories/characters/${name.state.name}/profiles`,{
       headers:{
@@ -64,14 +74,21 @@ function Characters() {
         .then(gem => {
           //보석 정보
           if (gem !== null) {
-            setEffects(gem.Effects.sort((a: Effects, b: Effects) => { 
+            setEffects(gem.Effects.sort((a: Effects, b: Effects) => {
               if (a.GemSlot && b.GemSlot) {
                 if (a.GemSlot < b.GemSlot) {
                   return -1;
-                }
-              }
-            }))
-            setGems(gem);
+                };
+              };
+            }));
+            // setGems(gem);
+            setGems(gem.Gems.sort((a: Levels, b: Levels) => {
+              if (a.Level && b.Level) {
+                if (a.Level > b.Level) {
+                  return -1;
+                };
+              };
+            }));
             fetch(`https://developer-lostark.game.onstove.com/armories/characters/${name.state.name}/equipment`,{
               headers:{
                 'accept':'application/json',
@@ -80,8 +97,8 @@ function Characters() {
             })
             .then(res => res.json())
             .then(abc => {
-              setWeapon(abc)
-            })
+              setWeapon(abc);
+            });
           } else {
             setEffects([{
               Description: null,
@@ -89,24 +106,15 @@ function Characters() {
               Icon: null,
               Name: null,
               Tooltip: null,
-            }])
-            setGems({
-              Effects: {
-                Description: null,
-                GemSlot: null,
-                Icon: null,
-                Name: null,
-                Tooltip: null,
-              },
-              Gems: [{
-                Grade:  null,
-                Icon:  null,
-                Level:  null,
-                Name:  null,
-                Slot:  null,
-                Tooltip:  null,
-              }]
-            });
+            }]);
+            setGems([{
+              Grade:  null,
+              Icon:  null,
+              Level:  null,
+              Name:  null,
+              Slot:  null,
+              Tooltip:  null,
+            }]);
             fetch(`https://developer-lostark.game.onstove.com/armories/characters/${name.state.name}/equipment`,{
               headers:{
               'accept':'application/json',
@@ -121,13 +129,18 @@ function Characters() {
                 Name: null,
                 Tooltip: null,
                 Type: null,
-              }])
-            })
-          }
-        })
+              }]);
+            });
+          };
+        });
       });
     });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[name]);
+  // useEffect(() => {
+  //   nav(-1);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  // },[])
   let ws: WarStats[] = [];
   let bs: BasicStats[] = [];
   
@@ -300,10 +313,10 @@ function Characters() {
           <div className="">
             <ul>
             {
-                gems && gems.Gems.map((obj, key) => {
-                  return <Gems key={key} idx={obj.Slot} obj={obj}/>
-                })
-              }
+              gems && gems.map((obj, key) => {
+                return <Gems key={key} idx={obj.Slot} obj={obj} />
+              })
+            }
             </ul>
           </div>
         </div>
