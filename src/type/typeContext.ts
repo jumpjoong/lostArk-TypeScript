@@ -1,15 +1,15 @@
 //로스트아크 api 넘어올 때 대문자로 넘어옴
 export interface ObjectCharacter {
   CharacterClassName: string;
-  CharacterImage?: string;
+  CharacterImage: string;
   CharacterLevel: number;
   CharacterName: string;
   ExpeditionLevel: number;
-  GuildMemberGrade?: string;
-  GuildName?: string;
+  GuildMemberGrade: string | null;
+  GuildName: string | null;
   ItemAvgLevel: string;
   ItemMaxLevel: string;
-  PvpGradeName?: string;
+  PvpGradeName: string | null;
   ServerName: string;
   Stats: object[];
   Tendencies: {
@@ -17,7 +17,7 @@ export interface ObjectCharacter {
     Point: number;
     Type : string;
   }[];
-  Title?: string | null;
+  Title: string | null;
   TotalSkillPoint: number;
   TownLevel: number;
   TownName: string;
@@ -32,20 +32,13 @@ export interface Effects {
   Tooltip: string | null;
 }
 
-export interface Gems {
-  // Effects: {
-  //   Description: string | null;
-  //   GemSlot: number | null;
-  //   Icon: string | null;
-  //   Name: string | null;
-  //   Tooltip: string | null;
-  // };
+export interface GemsType {
   Grade: string | null;
   Icon: string | null;
   Level: number | null;
   Name: string | null | TrustedHTML;
   Slot: number | null;
-  Tooltip: number | null;
+  Tooltip: ElementNumber | null;
 }
 
 export interface Weapon {
@@ -69,27 +62,38 @@ export interface QualityCurrent {
   [key: string]: QualityCurrentDetail
 }
 
-type AblillityStoneDetailValue = {
-  Element_000: ContentStr
+interface AblillityStoneDetailValue {
+  Element_000: ContentStr;
 }
 
-type ContentStr = {
-  contentStr: ElementNumber
+interface ContentStr {
+  contentStr: ElementNumber;
 }
 
-type ElementNumber = {
-  Element_001: object,
-  Element_002: object,
-  Element_003: object
-  [key: string]: any
+export interface ElementNumber {
+  Element_001: GemsDetails;
+  Element_002: GemsDetails;
+  Element_003: GemsDetails;
+  Element_004: GemsDetails;
+  [key: string]: any | GemsDetails;
 }
 
-type QualityCurrentDetail = {
+interface GemsDetails {
+  type: string,
+  value: GemsDeatailsElement,
+}
+
+interface GemsDeatailsElement {
+  Element_000: string;
+  Element_001: string;
+}
+
+interface QualityCurrentDetail {
   type: string,
   value: QualityCurrentDetailValue
 }
 
-type QualityCurrentDetailValue = {
+interface QualityCurrentDetailValue {
   leftStr0: string,
   leftStr1: string,
   leftStr2: string,

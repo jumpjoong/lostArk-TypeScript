@@ -4,12 +4,13 @@ import { AppC } from "../../context/Context"
 
 function Group() {
   const { organ } = useContext(AppC);
+  const group = organ.current;
   return (
     <>
       {
-        organ && organ.current.map((obj, key)=>{
+        group && group.map((obj, key)=>{
             return <li key={key}>
-              <Link to={`/${obj.CharacterName}`} state={{ name : obj.CharacterName, group : organ}}>
+              <Link to={`/${obj.CharacterName}`} state={{ name : obj.CharacterName, group : group}}>
                 <div className="char-box">
                   <p className="server">
                     {obj.ServerName}

@@ -29,7 +29,6 @@ interface Engra {
 }
 
 interface Levels {
-  
   Grade: string | null;
   Icon: string | null;
   Level: number | null;
@@ -137,10 +136,7 @@ function Characters() {
     });
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[name]);
-  // useEffect(() => {
-  //   nav(-1);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  // },[])
+  
   let ws: WarStats[] = [];
   let bs: BasicStats[] = [];
   

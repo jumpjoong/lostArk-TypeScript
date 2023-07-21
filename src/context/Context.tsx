@@ -1,5 +1,5 @@
-import React, { createContext, useRef, useState } from "react"
-import { Effects, Gems, ObjectCharacter, Weapon } from "../type/typeContext"
+import React, { createContext, useMemo, useRef, useState } from "react"
+import { Effects, GemsType, ObjectCharacter, Weapon } from "../type/typeContext"
 
 interface AppContextProps {
   elName: React.RefObject<HTMLInputElement>;
@@ -12,8 +12,8 @@ interface AppContextProps {
   setEffects: React.Dispatch<React.SetStateAction<Effects[]>>;
   weapon: Weapon[];
   setWeapon: React.Dispatch<React.SetStateAction<Weapon[]>>;
-  gems: Gems[];
-  setGems:  React.Dispatch<React.SetStateAction<Gems[]>>
+  gems: GemsType[];
+  setGems:  React.Dispatch<React.SetStateAction<GemsType[]>>
   legend: React.CSSProperties;
   hero: React.CSSProperties;
   hide: boolean;
@@ -49,14 +49,7 @@ export const Context = ({children}: {children: JSX.Element}) => {
     Tooltip: null,
   }]);
   //보유중인 보석 (Gems.tsx)
-  const [gems, setGems] = useState<Gems[]>([{
-    // Effects: {
-    //   Description: null,
-    //   GemSlot: null,
-    //   Icon: null,
-    //   Name: null,
-    //   Tooltip: null,
-    // },
+  const [gems, setGems] = useState<GemsType[]>([{
     Grade:  null,
     Icon:  null,
     Level:  null,
@@ -64,11 +57,11 @@ export const Context = ({children}: {children: JSX.Element}) => {
     Slot:  null,
     Tooltip:  null,
   }]);
-  console.log(gems)
   //보유중인 장비 (Weapon.tsx)
   const [weapon, setWeapon] = useState<Weapon[]>([])
   //더보기 컨트롤(Weapon.tsx)
   const [hide, setHide] = useState(false)
+
   const legend = { //전설 백그라운드
     background : 'linear-gradient(135deg, #362003, #9e5f04)'
   };
