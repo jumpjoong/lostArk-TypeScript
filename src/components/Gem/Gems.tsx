@@ -1,6 +1,6 @@
-import { useState, useContext, useEffect, SetStateAction } from 'react'
+import { useState, useContext } from 'react'
 import { AppC } from '../../context/Context';
-import { ElementNumber, GemsType } from '../../type/typeContext';
+import { GemsType } from '../../type/typeContext';
 
 interface GemsProps {
   idx: number | null,
@@ -40,10 +40,12 @@ function Gems({idx, obj}: GemsProps) {
   } else {
     return null;
   }
+  
   //스킬 이름 자르기
   const skillName = gemsDetails !== null && gemsDetails.slice(gemsDetails.indexOf('>')+1, gemsDetails.lastIndexOf(('<')));
   //스킬 설명 자르기
   const skillDescription = gemsDetails !== null && gemsDetails.slice(gemsDetails.indexOf('</FONT>')+8);
+  console.log(skillName)
   //반환
     if(obj.Grade === "전설") {
       return <li data-idx={idx} style={legend} onMouseEnter={mouse} onMouseLeave={mouseOut} >
@@ -61,16 +63,12 @@ function Gems({idx, obj}: GemsProps) {
       <p>{obj.Level}</p>
       <div className={tip ? 'tips' : 'hidden'}>
         <p className="gem-info " dangerouslySetInnerHTML={obj.Name ? {__html: obj.Name}: undefined} />
-        <p>{idx !== null && effects[idx] && skillName}</p>
-        <p>{idx !== null && effects[idx] && skillDescription}</p>
+        <p>{idx !== null && skillName}</p>
+        <p>{idx !== null && skillDescription}</p>
       </div>
     </li>
     }
   } 
-  // else {
-    ////이벤트 보석을 가진 캐릭터 설정 해야함
-    // return <></>
-  // }
 
 
 export default Gems;
