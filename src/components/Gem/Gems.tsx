@@ -16,15 +16,19 @@ function Gems({idx, obj}: GemsProps) {
   const mouseOut = () => {
     setTip(!tip);
   }
+
   //보석 마우스 오버 시 이벤트
   const mouse = () => {
     setTip(!tip);
   }
+
   //gems에 있는 Tooltip deep clone
   const json = JSON.parse(JSON.stringify(obj.Tooltip));
+
   //변수명 json을 parse **안하면 객체가 아닌 스트링임
   //아...jsonParse 일반 전설 = 6, 일반 영웅 = 7, 이벤트 영웅 = 8 의 길이를 가지고 있음
   const jsonParse = JSON.parse(json);
+  
   //객체로 만든걸 깊게 들어가기 (이벤트 캐릭일 경우 Element_005로 접근 해야함)
   let gemsDetails = null
   //보석이 없는 경우 예외 처리 했음
@@ -40,12 +44,12 @@ function Gems({idx, obj}: GemsProps) {
   } else {
     return null;
   }
-  
+
   //스킬 이름 자르기
   const skillName = gemsDetails !== null && gemsDetails.slice(gemsDetails.indexOf('>')+1, gemsDetails.lastIndexOf(('<')));
+
   //스킬 설명 자르기
   const skillDescription = gemsDetails !== null && gemsDetails.slice(gemsDetails.indexOf('</FONT>')+8);
-  console.log(skillName)
   //반환
     if(obj.Grade === "전설") {
       return <li data-idx={idx} style={legend} onMouseEnter={mouse} onMouseLeave={mouseOut} >
@@ -69,68 +73,5 @@ function Gems({idx, obj}: GemsProps) {
     </li>
     }
   } 
-
-
+  
 export default Gems;
-
-
-////////////////gems
-//   "Element_004": {
-//     "type": "ItemPartBox",
-//     "value": {
-//       "Element_000": "<FONT COLOR='#A9D0F5'>효과</FONT>",
-//       "Element_001": "[기상술사] <FONT COLOR='#FFD200'>소용돌이</FONT> 피해 21.00% 증가"
-//     }
-//   },
-
-/////////////////////////effects
-// "{
-//   "Element_000": {
-//     "type": "NameTagBox",
-//     "value": "<P ALIGN='CENTER'><FONT COLOR='#F99200'>7레벨 멸화의 보석</FONT></P>"
-//   },
-//   "Element_001": {
-//     "type": "ItemTitle",
-//     "value": {
-//       "bEquip": 0,
-//       "leftStr0": "<FONT SIZE='12'><FONT COLOR='#F99200'>전설 보석</FONT></FONT>",
-//       "leftStr2": "<FONT SIZE='14'>아이템 티어 3</FONT>",
-//       "qualityValue": -1,
-//       "rightStr0": "",
-//       "slotData": {
-//         "advBookIcon": 0,
-//         "battleItemTypeIcon": 0,
-//         "cardIcon": false,
-//         "friendship": 0,
-//         "iconGrade": 4,
-//         "iconPath": "https://cdn-lostark.game.onstove.com/efui_iconatlas/use/use_9_52.png",
-//         "imagePath": "",
-//         "islandIcon": 0,
-//         "rtString": "Lv.7",
-//         "seal": false,
-//         "temporary": 0,
-//         "town": 0,
-//         "trash": 0
-//       }
-//     }
-//   },
-//   "Element_002": {
-//     "type": "MultiTextBox",
-//     "value": "|거래가능"
-//   },
-//   "Element_003": {
-//     "type": "SingleTextBox",
-//     "value": "보석 레벨 7"
-//   },
-//   "Element_004": {
-//     "type": "ItemPartBox",
-//     "value": {
-//       "Element_000": "<FONT COLOR='#A9D0F5'>효과</FONT>",
-//       "Element_001": "[기상술사] <FONT COLOR='#FFD200'>소용돌이</FONT> 피해 21.00% 증가"
-//     }
-//   },
-//   "Element_005": {
-//     "type": "SingleTextBox",
-//     "value": "<FONT SIZE='12'><FONT COLOR='#C24B46'>분해불가</FONT></FONT>"
-//   }
-// }"
