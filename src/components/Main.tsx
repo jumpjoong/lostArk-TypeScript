@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect } from "react";
 import { AppC } from "../context/Context";
 import Insert from "./SearchInput/Insert";
 import { ObjectCharacter } from "../type/typeContext";
@@ -9,29 +9,30 @@ interface CharacterName {
 }
 
 function Main() {
-  const { input, elName, organ } = useContext(AppC);
-  const length = useRef<number>(0);
-  const [state, setState] = useState(0);
-  const body = document.getElementsByTagName("body")[0];
-
+  const { input, elName, setTest } = useContext(AppC);
+  let num:number 
+  const obj:ObjectCharacter[] = [] 
   ///검색 이벤트
   const searchE = () => {
-    //map 돌면서 ref에 모든 캐릭터 정보가 들어감
+    //그룹배열 초기화
+    setTest([])
+    //map 돌면서 obj에 모든 캐릭터 정보가 들어감
     const update = (privacy: ObjectCharacter) => {
-      organ.current = [...organ.current, privacy]
-      // Ref에 쌓이고 렌더링이 일어날 수 있게 마지막에 렌더링시킴, 레벨순으로 정렬
-      if (organ.current.length === length.current) {
-        organ.current.sort((a, b)=> {
-          if (a.ItemMaxLevel > b.ItemMaxLevel) {
-            return -1;
-          } else if (a.ItemMaxLevel < b.ItemMaxLevel) {
-            return 1;
-          } else {
-            return 0;
-          }
-        });
-        //렌더링 설정
-        setState(state + 1);
+      //obj에 복사본 하나씩 넣음
+      obj.push(...[privacy]);
+       //obj의 길이와 num의 길이(객체의 수)와 같아지면 setTest에 넣음 렌더링도 같이, 레벨순으로 정렬
+      if (obj.length === num) {
+        setTest(
+          obj.sort((a, b)=> {
+            if (a.ItemMaxLevel > b.ItemMaxLevel) {
+              return -1;
+            } else if (a.ItemMaxLevel < b.ItemMaxLevel) {
+              return 1;
+            } else {
+              return 0;
+            }
+          })
+        )
       }
     }
     //입력한 캐릭터 검색
@@ -44,7 +45,7 @@ function Main() {
     .then(res => res.json())
     .then(characters => {
       //캐릭터 이름 검색한걸로 보유중인 캐릭터 전부 map돌려서 재검색 하면서 update함수 실행
-      group(characters)
+      group(characters);
       try {
         characters.map(async(obj: CharacterName) => {
           return await fetch(`https://developer-lostark.game.onstove.com/armories/characters/${obj.CharacterName}/profiles`,{
@@ -62,12 +63,13 @@ function Main() {
         console.debug(err)
       }
     });
-    
   };
    //마지막 개수 확인용 및 없는 닉네임 에러 출력
   const group = (groupLength: []) => {
     try {
-      length.current = groupLength.length
+      // length = groupLength.length
+      // setGroupLength(groupLength.length)
+      num = groupLength.length
     } catch {
       alert('닉네임 정보가 없습니다! 다시 입력하세요.')
       elName.current!.value = ''
@@ -76,15 +78,12 @@ function Main() {
   //인풋의 값이 바뀌면 img길이 초기화하고 searchE 실행
   useEffect(() => {
     searchE();
-    body.style.height = "100vh";
-    body.style.backgroundColor = "#15181d";
     // eslint-disable-next-line react-hooks/exhaustive-deps
   },[input]);
-
   return (
     <div className="App">
       <header>
-        <Insert/>
+        <Insert />
       </header>
       <main className="first-main">
         <div className="search-box">

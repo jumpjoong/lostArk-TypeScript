@@ -3,14 +3,13 @@ import { Link } from "react-router-dom"
 import { AppC } from "../../context/Context"
 
 function Group() {
-  const { organ } = useContext(AppC);
-  const group = organ.current;
+  const { test } = useContext(AppC);
   return (
     <>
       {
-        group && group.map((obj, key)=>{
+        test && test.map((obj, key)=>{
             return <li key={key}>
-              <Link to={`/${obj.CharacterName}`} state={{ name : obj.CharacterName, group : group}}>
+              <Link to={`/${obj.CharacterName}`} state={{ name : obj.CharacterName, group : test}}>
                 <div className="char-box">
                   <p className="server">
                     {obj.ServerName}

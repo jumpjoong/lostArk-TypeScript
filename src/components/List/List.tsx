@@ -4,18 +4,21 @@ import { Link, useLocation } from "react-router-dom";
 import { ObjectCharacter } from "../../type/typeContext";
 function List() {
   const [drop, setDrop] = useState(false);
-  const { char, organ } = useContext(AppC);
+  const { char, test, setTest } = useContext(AppC);
   const name = useLocation();
-  const group: ObjectCharacter[] = name.state.group;
+  const group: ObjectCharacter[]= name.state.group;
   //드롭다운 메뉴
   const list = () => {
     setDrop(!drop);
+  };
+  const reset = () => {
+    setTest([])
   }
   return (
     <div className='name'>
-      {organ !== undefined && 
+      {test !== undefined && 
         <div className='name-sub'>
-          <Link to="/">
+          <Link to="/" state="" onClick={reset}>
             <p><img src='./icon/mococo2.gif' alt='메인으로가기'></img></p>
           </Link>
           <div className='header-sub' onClick={list}>
@@ -30,7 +33,7 @@ function List() {
           <div className={drop ? 'hidden active' : 'hidden noActive'}>
             <ul>
               {
-                group && group.map((obj, key)=> {
+                test && test.map((obj, key)=> {
                   return <li key={key}>
                     <Link to={`/${obj.CharacterName}`} state={{ name : obj.CharacterName , group : group }} onClick={list}>
                       {obj.CharacterName}

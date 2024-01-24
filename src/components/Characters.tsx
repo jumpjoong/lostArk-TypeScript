@@ -80,7 +80,6 @@ function Characters() {
                 };
               };
             }));
-            // setGems(gem);
             setGems(gem.Gems.sort((a: Levels, b: Levels) => {
               if (a.Level && b.Level) {
                 if (a.Level > b.Level) {
@@ -122,13 +121,7 @@ function Characters() {
             })
             .then(res => res.json())
             .then(abc => {
-              setWeapon([{
-                Grade: null,
-                Icon: null,
-                Name: null,
-                Tooltip: null,
-                Type: null,
-              }]);
+              setWeapon(abc);
             });
           };
         });
@@ -150,11 +143,12 @@ function Characters() {
       Type: obj.Type,
       Value: obj.Value,
     }));
-  }
+  };
   //더보기 컨트롤
   const more = () => {
     setHide(!hide)
-  }
+  };
+
   return (
     <main className="second-main">
       <div className='char'>

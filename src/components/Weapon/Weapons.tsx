@@ -4,7 +4,7 @@ import { Weapon, QualityCurrent, AblillityStoneDetail } from "../../type/typeCon
 
 function Weapons() {
   const { weapon, hide, legend, hero, relics,legendColor, heroColor, relicsColor, old, oldColor, estherColor, esther } = useContext(AppC);
-  const qualityNumber = useRef<QualityCurrent[]>([])
+  let qualityNumber: QualityCurrent[] = []
   //장비 찾기
   const filt = weapon && weapon.filter((item)=> item.Type !== '')
   //어빌리티 스톤 찾기
@@ -46,19 +46,19 @@ function Weapons() {
   // 품질 숫자 따오기
   if (list7 !== undefined) {
     for (let i = 0; i < list7.length; i++) {
-      qualityNumber.current = [...qualityNumber.current, JSON.parse(JSON.parse(JSON.stringify(list7[i].Tooltip)))]
+      qualityNumber = [...qualityNumber, JSON.parse(JSON.parse(JSON.stringify(list7[i].Tooltip)))]
     }
   }
   // 각인 활성화 이미지
-  let bb = [];
+  let emptyAblill = [];
   let ablillityStoneDetail:AblillityStoneDetail[] = [];
   let abilActive;
-  bb = abilTip && Object.keys(abilTip)
+  emptyAblill = abilTip && Object.keys(abilTip)
   
   // 툴팁 
   if (abilTip) {
-    for (let i = 0; i < bb.length; i++) { 
-      ablillityStoneDetail = [...ablillityStoneDetail, (abilTip[bb[i]])]
+    for (let i = 0; i < emptyAblill.length; i++) { 
+      ablillityStoneDetail = [...ablillityStoneDetail, (abilTip[emptyAblill[i]])]
     }
   }
 
@@ -75,7 +75,7 @@ function Weapons() {
     abilNum.push(abilActive.value.Element_000.contentStr)
     // 어빌리티 스톤 활성화 숫자 자르기
     for(let i = 0; i < 3; i++){
-      abilDetail = bb && abilActive.value.Element_000.contentStr[`Element_00${i}`].contentStr
+      abilDetail = emptyAblill && abilActive.value.Element_000.contentStr[`Element_00${i}`].contentStr
       abilEff.push(abilDetail.slice(abilDetail.indexOf('+')+1,abilDetail.lastIndexOf('<')))
     }
   }
@@ -86,7 +86,7 @@ function Weapons() {
           list7 && list7.map((obj, key)=> {
           if (obj.Type !== "팔찌" && obj.Type !== "나침반" && obj.Type !== "부적") {
             if (obj.Grade === "유물") {
-              if (qualityNumber.current[key].Element_001.value.qualityValue == -1) {
+              if (qualityNumber[key].Element_001.value.qualityValue == -1) {
                 return <div key={key} className={`eq-weapon ${key}`} >
                   <figure>
                     <img src={`${obj.Icon}`} alt="이미지" style={relics}/>
@@ -101,12 +101,12 @@ function Weapons() {
                     <p style={relicsColor}>{obj.Name}</p>
                   </div>
                 </div>
-              } else if (qualityNumber.current[key].Element_001.value.qualityValue == 0) {
+              } else if (qualityNumber[key].Element_001.value.qualityValue == 0) {
                 return <div key={key} className={`eq-weapon ${key}`} >
                   <figure>
                     <img src={`${obj.Icon}`} alt="이미지" style={relics}/>
                     <div className="quality">
-                      <p style={{width : `${qualityNumber.current[key].Element_001.value.qualityValue}%`, backgroundColor :'gray'}}></p>
+                      <p style={{width : `${qualityNumber[key].Element_001.value.qualityValue}%`, backgroundColor :'gray'}}></p>
                     </div>
                   </figure>
                   <div>
@@ -114,12 +114,12 @@ function Weapons() {
                     <p style={relicsColor}>{obj.Name}</p>
                   </div>
                 </div>
-              } else if (1 < qualityNumber.current[key].Element_001.value.qualityValue && qualityNumber.current[key].Element_001.value.qualityValue < 10) {
+              } else if (1 < qualityNumber[key].Element_001.value.qualityValue && qualityNumber[key].Element_001.value.qualityValue < 10) {
                 return <div key={key} className={`eq-weapon ${key}`} >
                   <figure>
                     <img src={`${obj.Icon}`} alt="이미지" style={relics}/>
                     <div className="quality">
-                      <p style={{width : `${qualityNumber.current[key].Element_001.value.qualityValue}%`, backgroundColor : "red"}}></p>
+                      <p style={{width : `${qualityNumber[key].Element_001.value.qualityValue}%`, backgroundColor : "red"}}></p>
                     </div>
                   </figure>
                   <div>
@@ -127,12 +127,12 @@ function Weapons() {
                     <p style={relicsColor}>{obj.Name}</p>
                   </div>
                 </div>
-              } else if (9 < qualityNumber.current[key].Element_001.value.qualityValue && qualityNumber.current[key].Element_001.value.qualityValue < 30) {
+              } else if (9 < qualityNumber[key].Element_001.value.qualityValue && qualityNumber[key].Element_001.value.qualityValue < 30) {
                 return <div key={key} className={`eq-weapon ${key}`} >
                   <figure>
                     <img src={`${obj.Icon}`} alt="이미지" style={relics}/>
                     <div className="quality">
-                      <p style={{width : `${qualityNumber.current[key].Element_001.value.qualityValue}%`, backgroundColor : "rgb(219, 192, 0)"}}></p>
+                      <p style={{width : `${qualityNumber[key].Element_001.value.qualityValue}%`, backgroundColor : "rgb(219, 192, 0)"}}></p>
                     </div>
                   </figure>
                   <div>
@@ -140,12 +140,12 @@ function Weapons() {
                     <p style={relicsColor}>{obj.Name}</p>
                   </div>
                 </div>
-              } else if (29 < qualityNumber.current[key].Element_001.value.qualityValue && qualityNumber.current[key].Element_001.value.qualityValue < 70) {
+              } else if (29 < qualityNumber[key].Element_001.value.qualityValue && qualityNumber[key].Element_001.value.qualityValue < 70) {
                 return <div key={key} className={`eq-weapon ${key}`} >
                   <figure>
                     <img src={`${obj.Icon}`} alt="이미지" style={relics}/>
                     <div className="quality">
-                      <p style={{width : `${qualityNumber.current[key].Element_001.value.qualityValue}%`, backgroundColor : "rgb(0, 183, 0)"}}></p>
+                      <p style={{width : `${qualityNumber[key].Element_001.value.qualityValue}%`, backgroundColor : "rgb(0, 183, 0)"}}></p>
                     </div>
                   </figure>
                   <div>
@@ -153,12 +153,12 @@ function Weapons() {
                     <p style={relicsColor}>{obj.Name}</p>
                   </div>
                 </div>
-              } else if (69 < qualityNumber.current[key].Element_001.value.qualityValue && qualityNumber.current[key].Element_001.value.qualityValue < 90) {
+              } else if (69 < qualityNumber[key].Element_001.value.qualityValue && qualityNumber[key].Element_001.value.qualityValue < 90) {
                 return <div key={key} className={`eq-weapon ${key}`} >
                   <figure>
                     <img src={`${obj.Icon}`} alt="이미지" style={relics}/>
                     <div className="quality">
-                      <p style={{width : `${qualityNumber.current[key].Element_001.value.qualityValue}%`, backgroundColor : "rgb(0, 84, 255)"}}></p>
+                      <p style={{width : `${qualityNumber[key].Element_001.value.qualityValue}%`, backgroundColor : "rgb(0, 84, 255)"}}></p>
                     </div>
                   </figure>
                   <div>
@@ -166,12 +166,12 @@ function Weapons() {
                     <p style={relicsColor}>{obj.Name}</p>
                   </div>
                 </div>
-              } else if (89 < qualityNumber.current[key].Element_001.value.qualityValue && qualityNumber.current[key].Element_001.value.qualityValue < 100) {
+              } else if (89 < qualityNumber[key].Element_001.value.qualityValue && qualityNumber[key].Element_001.value.qualityValue < 100) {
                 return <div key={key} className={`eq-weapon ${key}`} >
                   <figure>
                     <img src={`${obj.Icon}`} alt="이미지" style={relics}/>
                     <div className="quality">
-                      <p style={{width : `${qualityNumber.current[key].Element_001.value.qualityValue}%`, backgroundColor : "rgb(255, 0, 221)"}}></p>
+                      <p style={{width : `${qualityNumber[key].Element_001.value.qualityValue}%`, backgroundColor : "rgb(255, 0, 221)"}}></p>
                     </div>
                   </figure>
                   <div>
@@ -184,7 +184,7 @@ function Weapons() {
                   <figure>
                     <img src={`${obj.Icon}`} alt="이미지" style={relics}/>
                     <div className="quality">
-                      <p style={{width : `${qualityNumber.current[key].Element_001.value.qualityValue}%`, backgroundColor : "rgb(255, 94, 0)"}}></p>
+                      <p style={{width : `${qualityNumber[key].Element_001.value.qualityValue}%`, backgroundColor : "rgb(255, 94, 0)"}}></p>
                     </div>
                   </figure>
                   <div>
@@ -194,7 +194,7 @@ function Weapons() {
                 </div>
               }
             } else if (obj.Grade === "전설") {
-              if (qualityNumber.current[key].Element_001.value.qualityValue == -1) {
+              if (qualityNumber[key].Element_001.value.qualityValue == -1) {
                 return <div key={key} className={`eq-weapon ${key}`} >
                   <figure>
                     <img src={`${obj.Icon}`} alt="이미지" style={legend}/>
@@ -204,12 +204,12 @@ function Weapons() {
                     <p style={relicsColor}>{obj.Name}</p>
                   </div>
                 </div>
-              } else if (qualityNumber.current[key].Element_001.value.qualityValue == 0) {
+              } else if (qualityNumber[key].Element_001.value.qualityValue == 0) {
                 return <div key={key} className={`eq-weapon ${key}`} >
                   <figure>
                     <img src={`${obj.Icon}`} alt="이미지" style={legend}/>
                     <div className="quality">
-                      <p style={{width : `${qualityNumber.current[key].Element_001.value.qualityValue}%`, backgroundColor :'gray'}}></p>
+                      <p style={{width : `${qualityNumber[key].Element_001.value.qualityValue}%`, backgroundColor :'gray'}}></p>
                     </div>
                   </figure>
                   <div>
@@ -217,12 +217,12 @@ function Weapons() {
                     <p style={relicsColor}>{obj.Name}</p>
                   </div>
                 </div>
-              } else if (1 < qualityNumber.current[key].Element_001.value.qualityValue && qualityNumber.current[key].Element_001.value.qualityValue < 10) {
+              } else if (1 < qualityNumber[key].Element_001.value.qualityValue && qualityNumber[key].Element_001.value.qualityValue < 10) {
               return <div key={key} className={`eq-weapon ${key}`}>
                 <figure>
                   <img src={`${obj.Icon}`} alt="이미지" style={legend}/>
                   <div className="quality">
-                    <p style={{width : `${qualityNumber.current[key].Element_001.value.qualityValue}%`}}></p>
+                    <p style={{width : `${qualityNumber[key].Element_001.value.qualityValue}%`}}></p>
                   </div>
                 </figure>
                 <div>
@@ -230,12 +230,12 @@ function Weapons() {
                   <p style={legendColor}>{obj.Name}</p>
                 </div>
               </div>
-              } else if (10 < qualityNumber.current[key].Element_001.value.qualityValue && qualityNumber.current[key].Element_001.value.qualityValue < 30) {
+              } else if (10 < qualityNumber[key].Element_001.value.qualityValue && qualityNumber[key].Element_001.value.qualityValue < 30) {
                 return <div key={key} className={`eq-weapon ${key}`}>
                 <figure>
                   <img src={`${obj.Icon}`} alt="이미지" style={legend}/>
                   <div className="quality">
-                    <p style={{width : `${qualityNumber.current[key].Element_001.value.qualityValue}%`, backgroundColor : "rgb(219, 192, 0)"}}></p>
+                    <p style={{width : `${qualityNumber[key].Element_001.value.qualityValue}%`, backgroundColor : "rgb(219, 192, 0)"}}></p>
                   </div>
                 </figure>
                 <div>
@@ -243,12 +243,12 @@ function Weapons() {
                   <p style={legendColor}>{obj.Name}</p>
                 </div>
               </div>
-              } else if (29 < qualityNumber.current[key].Element_001.value.qualityValue && qualityNumber.current[key].Element_001.value.qualityValue < 70) {
+              } else if (29 < qualityNumber[key].Element_001.value.qualityValue && qualityNumber[key].Element_001.value.qualityValue < 70) {
                 return <div key={key} className={`eq-weapon ${key}`}>
                 <figure>
                   <img src={`${obj.Icon}`} alt="이미지" style={legend}/>
                   <div className="quality">
-                    <p style={{width : `${qualityNumber.current[key].Element_001.value.qualityValue}%`, backgroundColor : "rgb(0, 183, 0)"}}></p>
+                    <p style={{width : `${qualityNumber[key].Element_001.value.qualityValue}%`, backgroundColor : "rgb(0, 183, 0)"}}></p>
                   </div>
                 </figure>
                 <div>
@@ -256,12 +256,12 @@ function Weapons() {
                   <p style={oldColor}>{obj.Name}</p>
                 </div>
               </div>
-              } else if (69 < qualityNumber.current[key].Element_001.value.qualityValue && qualityNumber.current[key].Element_001.value.qualityValue < 90) {
+              } else if (69 < qualityNumber[key].Element_001.value.qualityValue && qualityNumber[key].Element_001.value.qualityValue < 90) {
                 return <div key={key} className={`eq-weapon ${key}`}>
                 <figure>
                   <img src={`${obj.Icon}`} alt="이미지" style={legend}/>
                   <div className="quality">
-                    <p style={{width : `${qualityNumber.current[key].Element_001.value.qualityValue}%`, backgroundColor : "rgb(0, 84, 255)"}}></p>
+                    <p style={{width : `${qualityNumber[key].Element_001.value.qualityValue}%`, backgroundColor : "rgb(0, 84, 255)"}}></p>
                   </div>
                 </figure>
                 <div>
@@ -269,12 +269,12 @@ function Weapons() {
                   <p style={oldColor}>{obj.Name}</p>
                 </div>
               </div>
-              } else if (89 < qualityNumber.current[key].Element_001.value.qualityValue && qualityNumber.current[key].Element_001.value.qualityValue < 100){
+              } else if (89 < qualityNumber[key].Element_001.value.qualityValue && qualityNumber[key].Element_001.value.qualityValue < 100){
                 return <div key={key} className={`eq-weapon ${key}`}>
                 <figure>
                   <img src={`${obj.Icon}`} alt="이미지" style={legend}/>
                   <div className="quality">
-                    <p style={{width : `${qualityNumber.current[key].Element_001.value.qualityValue}%`, backgroundColor: "rgb(255, 0, 221)"}}></p>
+                    <p style={{width : `${qualityNumber[key].Element_001.value.qualityValue}%`, backgroundColor: "rgb(255, 0, 221)"}}></p>
                   </div>
                 </figure>
                 <div>
@@ -287,7 +287,7 @@ function Weapons() {
                 <figure>
                   <img src={`${obj.Icon}`} alt="이미지" style={legend}/>
                   <div className="quality">
-                    <p style={{width : `${qualityNumber.current[key].Element_001.value.qualityValue}%`, backgroundColor: "rgb(255, 94, 0)"}}></p>
+                    <p style={{width : `${qualityNumber[key].Element_001.value.qualityValue}%`, backgroundColor: "rgb(255, 94, 0)"}}></p>
                   </div>
                 </figure>
                 <div>
@@ -297,7 +297,7 @@ function Weapons() {
               </div>
               }
             } else if (obj.Grade === "고대") {
-              if (qualityNumber.current[key].Element_001.value.qualityValue == -1) {
+              if (qualityNumber[key].Element_001.value.qualityValue == -1) {
                 return <div key={key} className={`eq-weapon ${key}`} >
                   <figure>
                     <img src={`${obj.Icon}`} alt="이미지" style={old}/>
@@ -307,12 +307,12 @@ function Weapons() {
                     <p style={relicsColor}>{obj.Name}</p>
                   </div>
                 </div>
-              } else if (qualityNumber.current[key].Element_001.value.qualityValue == 0) {
+              } else if (qualityNumber[key].Element_001.value.qualityValue == 0) {
                 return <div key={key} className={`eq-weapon ${key}`} >
                   <figure>
                     <img src={`${obj.Icon}`} alt="이미지" style={old}/>
                     <div className="quality">
-                      <p style={{width : `${qualityNumber.current[key].Element_001.value.qualityValue}%`, backgroundColor :'gray'}}></p>
+                      <p style={{width : `${qualityNumber[key].Element_001.value.qualityValue}%`, backgroundColor :'gray'}}></p>
                     </div>
                   </figure>
                   <div>
@@ -320,12 +320,12 @@ function Weapons() {
                     <p style={relicsColor}>{obj.Name}</p>
                   </div>
                 </div>
-              } else if (1 < qualityNumber.current[key].Element_001.value.qualityValue && qualityNumber.current[key].Element_001.value.qualityValue < 10) {
+              } else if (1 < qualityNumber[key].Element_001.value.qualityValue && qualityNumber[key].Element_001.value.qualityValue < 10) {
                 return <div key={key} className={`eq-weapon ${key}`}>
                   <figure>
                     <img src={`${obj.Icon}`} alt="이미지" style={old}/>
                     <div className="quality">
-                      <p style={{width : `${qualityNumber.current[key].Element_001.value.qualityValue}%`}}></p>
+                      <p style={{width : `${qualityNumber[key].Element_001.value.qualityValue}%`}}></p>
                     </div>
                   </figure>
                   <div>
@@ -333,12 +333,12 @@ function Weapons() {
                     <p style={oldColor}>{obj.Name}</p>
                   </div>
                 </div>
-              } else if (9 < qualityNumber.current[key].Element_001.value.qualityValue && qualityNumber.current[key].Element_001.value.qualityValue < 30) {
+              } else if (9 < qualityNumber[key].Element_001.value.qualityValue && qualityNumber[key].Element_001.value.qualityValue < 30) {
                 return <div key={key} className={`eq-weapon ${key}`}>
                   <figure>
                     <img src={`${obj.Icon}`} alt="이미지" style={old}/>
                     <div className="quality">
-                      <p style={{width : `${qualityNumber.current[key].Element_001.value.qualityValue}%`, backgroundColor : "rgb(219, 192, 0)"}}></p>
+                      <p style={{width : `${qualityNumber[key].Element_001.value.qualityValue}%`, backgroundColor : "rgb(219, 192, 0)"}}></p>
                     </div>
                   </figure>
                   <div>
@@ -346,12 +346,12 @@ function Weapons() {
                     <p style={oldColor}>{obj.Name}</p>
                   </div>
                 </div>
-              } else if (29 < qualityNumber.current[key].Element_001.value.qualityValue && qualityNumber.current[key].Element_001.value.qualityValue < 70) {
+              } else if (29 < qualityNumber[key].Element_001.value.qualityValue && qualityNumber[key].Element_001.value.qualityValue < 70) {
                 return <div key={key} className={`eq-weapon ${key}`}>
                   <figure>
                     <img src={`${obj.Icon}`} alt="이미지" style={old}/>
                     <div className="quality">
-                      <p style={{width : `${qualityNumber.current[key].Element_001.value.qualityValue}%`, backgroundColor : "rgb(0, 183, 0)"}}></p>
+                      <p style={{width : `${qualityNumber[key].Element_001.value.qualityValue}%`, backgroundColor : "rgb(0, 183, 0)"}}></p>
                     </div>
                   </figure>
                   <div>
@@ -359,12 +359,12 @@ function Weapons() {
                     <p style={oldColor}>{obj.Name}</p>
                   </div>
                 </div>
-              } else if (69 < qualityNumber.current[key].Element_001.value.qualityValue && qualityNumber.current[key].Element_001.value.qualityValue < 90) {
+              } else if (69 < qualityNumber[key].Element_001.value.qualityValue && qualityNumber[key].Element_001.value.qualityValue < 90) {
                 return <div key={key} className={`eq-weapon ${key}`}>
                   <figure>
                     <img src={`${obj.Icon}`} alt="이미지" style={old}/>
                     <div className="quality">
-                      <p style={{width : `${qualityNumber.current[key].Element_001.value.qualityValue}%`, backgroundColor : "rgb(0, 84, 255)"}}></p>
+                      <p style={{width : `${qualityNumber[key].Element_001.value.qualityValue}%`, backgroundColor : "rgb(0, 84, 255)"}}></p>
                     </div>
                   </figure>
                   <div>
@@ -372,12 +372,12 @@ function Weapons() {
                     <p style={oldColor}>{obj.Name}</p>
                   </div>
                 </div>
-              } else if (89 < qualityNumber.current[key].Element_001.value.qualityValue && qualityNumber.current[key].Element_001.value.qualityValue < 100){
+              } else if (89 < qualityNumber[key].Element_001.value.qualityValue && qualityNumber[key].Element_001.value.qualityValue < 100){
                 return <div key={key} className={`eq-weapon ${key}`}>
                   <figure>
                     <img src={`${obj.Icon}`} alt="이미지" style={old}/>
                     <div className="quality">
-                      <p style={{width : `${qualityNumber.current[key].Element_001.value.qualityValue}%`, backgroundColor: "rgb(255, 0, 221)"}}></p>
+                      <p style={{width : `${qualityNumber[key].Element_001.value.qualityValue}%`, backgroundColor: "rgb(255, 0, 221)"}}></p>
                     </div>
                   </figure>
                   <div>
@@ -390,7 +390,7 @@ function Weapons() {
                 <figure>
                   <img src={`${obj.Icon}`} alt="이미지" style={old}/>
                   <div className="quality">
-                    <p style={{width : `${qualityNumber.current[key].Element_001.value.qualityValue}%`, backgroundColor: "rgb(255, 94, 0)"}}></p>
+                    <p style={{width : `${qualityNumber[key].Element_001.value.qualityValue}%`, backgroundColor: "rgb(255, 94, 0)"}}></p>
                   </div>
                 </figure>
                 <div>
@@ -400,7 +400,7 @@ function Weapons() {
               </div>
               }
             }else if (obj.Grade === "에스더") {
-              if (qualityNumber.current[key].Element_001.value.qualityValue == -1) {
+              if (qualityNumber[key].Element_001.value.qualityValue == -1) {
                 return <div key={key} className={`eq-weapon ${key}`} >
                 <figure>
                   <img src={`${obj.Icon}`} alt="이미지" style={esther}/>
@@ -410,12 +410,12 @@ function Weapons() {
                   <p style={relicsColor}>{obj.Name}</p>
                 </div>
               </div>
-              } else if (qualityNumber.current[key].Element_001.value.qualityValue == 0) {
+              } else if (qualityNumber[key].Element_001.value.qualityValue == 0) {
                 return <div key={key} className={`eq-weapon ${key}`} >
                   <figure>
                     <img src={`${obj.Icon}`} alt="이미지" style={esther}/>
                     <div className="quality">
-                      <p style={{width : `${qualityNumber.current[key].Element_001.value.qualityValue}%`, backgroundColor :'gray'}}></p>
+                      <p style={{width : `${qualityNumber[key].Element_001.value.qualityValue}%`, backgroundColor :'gray'}}></p>
                     </div>
                   </figure>
                   <div>
@@ -423,12 +423,12 @@ function Weapons() {
                     <p style={relicsColor}>{obj.Name}</p>
                   </div>
                 </div>
-              } else if (1 < qualityNumber.current[key].Element_001.value.qualityValue && qualityNumber.current[key].Element_001.value.qualityValue < 10) {
+              } else if (1 < qualityNumber[key].Element_001.value.qualityValue && qualityNumber[key].Element_001.value.qualityValue < 10) {
                 return <div key={key} className={`eq-weapon ${key}`}>
                   <figure>
                     <img src={`${obj.Icon}`} alt="이미지" style={esther}/>
                     <div className="quality">
-                      <p style={{width : `${qualityNumber.current[key].Element_001.value.qualityValue}%`}}></p>
+                      <p style={{width : `${qualityNumber[key].Element_001.value.qualityValue}%`}}></p>
                     </div>
                   </figure>
                   <div>
@@ -436,12 +436,12 @@ function Weapons() {
                     <p style={estherColor}>{obj.Name}</p>
                   </div>
                 </div>
-              } else if (9 < qualityNumber.current[key].Element_001.value.qualityValue && qualityNumber.current[key].Element_001.value.qualityValue < 30) {
+              } else if (9 < qualityNumber[key].Element_001.value.qualityValue && qualityNumber[key].Element_001.value.qualityValue < 30) {
                 return <div key={key} className={`eq-weapon ${key}`}>
                   <figure>
                     <img src={`${obj.Icon}`} alt="이미지" style={esther}/>
                     <div className="quality">
-                      <p style={{width : `${qualityNumber.current[key].Element_001.value.qualityValue}%`, backgroundColor : "rgb(219, 192, 0)"}}></p>
+                      <p style={{width : `${qualityNumber[key].Element_001.value.qualityValue}%`, backgroundColor : "rgb(219, 192, 0)"}}></p>
                     </div>
                   </figure>
                   <div>
@@ -449,12 +449,12 @@ function Weapons() {
                     <p style={estherColor}>{obj.Name}</p>
                   </div>
                 </div>
-              } else if (29 < qualityNumber.current[key].Element_001.value.qualityValue && qualityNumber.current[key].Element_001.value.qualityValue < 70) {
+              } else if (29 < qualityNumber[key].Element_001.value.qualityValue && qualityNumber[key].Element_001.value.qualityValue < 70) {
                 return <div key={key} className={`eq-weapon ${key}`}>
                   <figure>
                     <img src={`${obj.Icon}`} alt="이미지" style={esther}/>
                     <div className="quality">
-                      <p style={{width : `${qualityNumber.current[key].Element_001.value.qualityValue}%`, backgroundColor : "rgb(0, 183, 0)"}}></p>
+                      <p style={{width : `${qualityNumber[key].Element_001.value.qualityValue}%`, backgroundColor : "rgb(0, 183, 0)"}}></p>
                     </div>
                   </figure>
                   <div>
@@ -462,12 +462,12 @@ function Weapons() {
                     <p style={estherColor}>{obj.Name}</p>
                   </div>
                 </div>
-              } else if (69 < qualityNumber.current[key].Element_001.value.qualityValue && qualityNumber.current[key].Element_001.value.qualityValue < 90) {
+              } else if (69 < qualityNumber[key].Element_001.value.qualityValue && qualityNumber[key].Element_001.value.qualityValue < 90) {
                 return <div key={key} className={`eq-weapon ${key}`}>
                   <figure>
                     <img src={`${obj.Icon}`} alt="이미지" style={esther}/>
                     <div className="quality">
-                      <p style={{width : `${qualityNumber.current[key].Element_001.value.qualityValue}%`, backgroundColor : "rgb(0, 84, 255)"}}></p>
+                      <p style={{width : `${qualityNumber[key].Element_001.value.qualityValue}%`, backgroundColor : "rgb(0, 84, 255)"}}></p>
                     </div>
                   </figure>
                   <div>
@@ -475,12 +475,12 @@ function Weapons() {
                     <p style={estherColor}>{obj.Name}</p>
                   </div>
                 </div>
-              } else  if (89 < qualityNumber.current[key].Element_001.value.qualityValue && qualityNumber.current[key].Element_001.value.qualityValue < 100){
+              } else  if (89 < qualityNumber[key].Element_001.value.qualityValue && qualityNumber[key].Element_001.value.qualityValue < 100){
                 return <div key={key} className={`eq-weapon ${key}`}>
                   <figure>
                     <img src={`${obj.Icon}`} alt="이미지" style={esther}/>
                     <div className="quality">
-                      <p style={{width : `${qualityNumber.current[key].Element_001.value.qualityValue}%`, backgroundColor: "rgb(255, 0, 221)"}}></p>
+                      <p style={{width : `${qualityNumber[key].Element_001.value.qualityValue}%`, backgroundColor: "rgb(255, 0, 221)"}}></p>
                     </div>
                   </figure>
                   <div>
@@ -493,7 +493,7 @@ function Weapons() {
                   <figure>
                     <img src={`${obj.Icon}`} alt="이미지" style={esther}/>
                     <div className="quality">
-                      <p style={{width : `${qualityNumber.current[key].Element_001.value.qualityValue}%`, backgroundColor: "rgb(255, 94, 0)"}}></p>
+                      <p style={{width : `${qualityNumber[key].Element_001.value.qualityValue}%`, backgroundColor: "rgb(255, 94, 0)"}}></p>
                     </div>
                   </figure>
                   <div>
@@ -503,7 +503,7 @@ function Weapons() {
                 </div>
               }
             } else {
-              if (qualityNumber.current[key].Element_001.value.qualityValue == -1) {
+              if (qualityNumber[key].Element_001.value.qualityValue == -1) {
                 return <div key={key} className={`eq-weapon ${key}`} >
                   <figure>
                     <img src={`${obj.Icon}`} alt="이미지" style={relics}/>
@@ -513,12 +513,12 @@ function Weapons() {
                     <p style={relicsColor}>{obj.Name}</p>
                   </div>
                 </div>
-              } else if (qualityNumber.current[key].Element_001.value.qualityValue == 0) {
+              } else if (qualityNumber[key].Element_001.value.qualityValue == 0) {
                 return <div key={key} className={`eq-weapon ${key}`} >
                   <figure>
                     <img src={`${obj.Icon}`} alt="이미지" style={relics}/>
                     <div className="quality">
-                      <p style={{width : `${qualityNumber.current[key].Element_001.value.qualityValue}%`, backgroundColor :'gray'}}></p>
+                      <p style={{width : `${qualityNumber[key].Element_001.value.qualityValue}%`, backgroundColor :'gray'}}></p>
                     </div>
                   </figure>
                   <div>
@@ -526,12 +526,12 @@ function Weapons() {
                     <p style={relicsColor}>{obj.Name}</p>
                   </div>
                 </div>
-              } else if (1 < qualityNumber.current[key].Element_001.value.qualityValue && qualityNumber.current[key].Element_001.value.qualityValue < 10) {
+              } else if (1 < qualityNumber[key].Element_001.value.qualityValue && qualityNumber[key].Element_001.value.qualityValue < 10) {
                 return <div key={key} className={`eq-weapon ${key}`}>
                   <figure>
                     <img src={`${obj.Icon}`} alt="이미지" style={hero} />
                     <div className="quality">
-                      <p style={{width : `${qualityNumber.current[key].Element_001.value.qualityValue}%`}}></p>
+                      <p style={{width : `${qualityNumber[key].Element_001.value.qualityValue}%`}}></p>
                     </div>
                   </figure>
                   <div>
@@ -539,12 +539,12 @@ function Weapons() {
                     <p style={heroColor}>{obj.Name}</p>
                   </div>
                 </div>
-              } else if (9 < qualityNumber.current[key].Element_001.value.qualityValue && qualityNumber.current[key].Element_001.value.qualityValue < 30) {
+              } else if (9 < qualityNumber[key].Element_001.value.qualityValue && qualityNumber[key].Element_001.value.qualityValue < 30) {
                 return <div key={key} className={`eq-weapon ${key}`}>
                   <figure>
                     <img src={`${obj.Icon}`} alt="이미지" style={hero} />
                     <div className="quality">
-                      <p style={{width : `${qualityNumber.current[key].Element_001.value.qualityValue}%`, backgroundColor : "rgb(219, 192, 0)"}}></p>
+                      <p style={{width : `${qualityNumber[key].Element_001.value.qualityValue}%`, backgroundColor : "rgb(219, 192, 0)"}}></p>
                     </div>
                   </figure>
                   <div>
@@ -552,12 +552,12 @@ function Weapons() {
                     <p style={heroColor}>{obj.Name}</p>
                   </div>
                 </div>
-              } else if (29 < qualityNumber.current[key].Element_001.value.qualityValue && qualityNumber.current[key].Element_001.value.qualityValue < 70) {
+              } else if (29 < qualityNumber[key].Element_001.value.qualityValue && qualityNumber[key].Element_001.value.qualityValue < 70) {
                 return <div key={key} className={`eq-weapon ${key}`}>
                   <figure>
                     <img src={`${obj.Icon}`} alt="이미지" style={hero} />
                     <div className="quality">
-                      <p style={{width : `${qualityNumber.current[key].Element_001.value.qualityValue}%`, backgroundColor : "rgb(0, 183, 0)"}}></p>
+                      <p style={{width : `${qualityNumber[key].Element_001.value.qualityValue}%`, backgroundColor : "rgb(0, 183, 0)"}}></p>
                     </div>
                   </figure>
                   <div>
@@ -565,12 +565,12 @@ function Weapons() {
                     <p style={heroColor}>{obj.Name}</p>
                   </div>
                 </div>
-              } else if (69 < qualityNumber.current[key].Element_001.value.qualityValue && qualityNumber.current[key].Element_001.value.qualityValue < 90) {
+              } else if (69 < qualityNumber[key].Element_001.value.qualityValue && qualityNumber[key].Element_001.value.qualityValue < 90) {
                 return <div key={key} className={`eq-weapon ${key}`}>
                   <figure>
                     <img src={`${obj.Icon}`} alt="이미지" style={hero} />
                     <div className="quality">
-                      <p style={{width : `${qualityNumber.current[key].Element_001.value.qualityValue}%`, backgroundColor : "rgb(0, 84, 255)"}}></p>
+                      <p style={{width : `${qualityNumber[key].Element_001.value.qualityValue}%`, backgroundColor : "rgb(0, 84, 255)"}}></p>
                     </div>
                   </figure>
                   <div>
@@ -578,12 +578,12 @@ function Weapons() {
                     <p style={heroColor}>{obj.Name}</p>
                   </div>
                 </div>
-              } else if (89 < qualityNumber.current[key].Element_001.value.qualityValue && qualityNumber.current[key].Element_001.value.qualityValue < 100){
+              } else if (89 < qualityNumber[key].Element_001.value.qualityValue && qualityNumber[key].Element_001.value.qualityValue < 100){
                 return <div key={key} className={`eq-weapon ${key}`}>
                   <figure>
                     <img src={`${obj.Icon}`} alt="이미지" style={hero} />
                     <div className="quality">
-                      <p style={{width : `${qualityNumber.current[key].Element_001.value.qualityValue}%`, backgroundColor: "rgb(255, 0, 221)"}}></p>
+                      <p style={{width : `${qualityNumber[key].Element_001.value.qualityValue}%`, backgroundColor: "rgb(255, 0, 221)"}}></p>
                     </div>
                   </figure>
                   <div>
@@ -596,7 +596,7 @@ function Weapons() {
                   <figure>
                     <img src={`${obj.Icon}`} alt="이미지" style={hero} />
                     <div className="quality">
-                      <p style={{width : `${qualityNumber.current[key].Element_001.value.qualityValue}%`, backgroundColor: "rgb(255, 94, 0)"}}></p>
+                      <p style={{width : `${qualityNumber[key].Element_001.value.qualityValue}%`, backgroundColor: "rgb(255, 94, 0)"}}></p>
                     </div>
                   </figure>
                   <div>

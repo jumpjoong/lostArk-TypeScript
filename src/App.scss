@@ -19,6 +19,11 @@ p, dl, dt, dd, li {
   font-size: 1.2rem;
   font-family: 'Pretendard-Regular';
 }
+
+body {
+  height: 100vh;
+  background-color: #15181d;
+}
 .App {
   text-align: center;
   position: relative;

@@ -5,9 +5,8 @@ import { AppC } from '../../context/Context'
 function Insert() {
   const { elName, search } = useContext(AppC);
   
-  //메인버튼 누를 시 새고고침과 input값 빈 값으로 설정
+  //메인버튼 누를 시 새고고침
   const clear = () => {
-    elName.current!.value = '';
     window.location.reload();
   }
   return (
