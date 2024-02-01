@@ -3,11 +3,11 @@ import { Link } from "react-router-dom"
 import { AppC } from "../../context/Context"
 
 function Group() {
-  const { test } = useContext(AppC);
+  const { haveCharacterGroup } = useContext(AppC);
   return (
     <>
       {
-        test && test.map((obj, key)=>{
+        haveCharacterGroup && haveCharacterGroup.map((obj, key)=>{
             return <li key={key}>
               <Link to={`/${obj.CharacterName}`} state={{ name : obj.CharacterName, group : test}}>
                 <div className="char-box">
