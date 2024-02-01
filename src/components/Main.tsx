@@ -9,20 +9,20 @@ interface CharacterName {
 }
 
 function Main() {
-  const { input, elName, setTest } = useContext(AppC);
+  const { input, elName, setHaveCharacterGroup } = useContext(AppC);
   let num:number 
   const obj:ObjectCharacter[] = [] 
   ///검색 이벤트
   const searchE = () => {
     //그룹배열 초기화
-    setTest([])
+    setHaveCharacterGroup([])
     //map 돌면서 obj에 모든 캐릭터 정보가 들어감
     const update = (privacy: ObjectCharacter) => {
       //obj에 복사본 하나씩 넣음
       obj.push(...[privacy]);
        //obj의 길이와 num의 길이(객체의 수)와 같아지면 setTest에 넣음 렌더링도 같이, 레벨순으로 정렬
       if (obj.length === num) {
-        setTest(
+        setHaveCharacterGroup(
           obj.sort((a, b)=> {
             if (a.ItemMaxLevel > b.ItemMaxLevel) {
               return -1;

@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import { ObjectCharacter } from "../../type/typeContext";
 function List() {
   const [drop, setDrop] = useState(false);
-  const { char, test, setTest } = useContext(AppC);
+  const { char, haveCharacterGroup, setHaveCharacterGroup } = useContext(AppC);
   const name = useLocation();
   const group: ObjectCharacter[]= name.state.group;
   //드롭다운 메뉴
@@ -12,7 +12,7 @@ function List() {
     setDrop(!drop);
   };
   const reset = () => {
-    setTest([])
+    setHaveCharacterGroup([])
   }
   return (
     <div className='name'>
@@ -33,7 +33,7 @@ function List() {
           <div className={drop ? 'hidden active' : 'hidden noActive'}>
             <ul>
               {
-                test && test.map((obj, key)=> {
+                haveCharacterGroup && haveCharacterGroup.map((obj, key)=> {
                   return <li key={key}>
                     <Link to={`/${obj.CharacterName}`} state={{ name : obj.CharacterName , group : group }} onClick={list}>
                       {obj.CharacterName}

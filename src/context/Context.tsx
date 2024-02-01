@@ -5,8 +5,8 @@ interface AppContextProps {
   elName: React.RefObject<HTMLInputElement>;
   search: (e: React.FormEvent<HTMLFormElement>) => void;
   input: string | null;
-  test: ObjectCharacter[];
-  setTest: React.Dispatch<React.SetStateAction<ObjectCharacter[]>>;
+  haveCharacterGroup: ObjectCharacter[];
+  setHaveCharacterGroup: React.Dispatch<React.SetStateAction<ObjectCharacter[]>>;
   char: ObjectCharacter | undefined;
   setChar: React.Dispatch<React.SetStateAction<ObjectCharacter | undefined>>;
   effects: Effects[];
@@ -38,7 +38,7 @@ export const Context = ({children}: {children: JSX.Element}) => {
   //입력창에 입력된 값(Main.tsx)
   const [input, setInput] = useState<string | null>(null);
   //보유중인 캐릭터 그룹 (Group.tsx, List.tsx)
-  const [test, setTest] = useState<ObjectCharacter[]>([]);
+  const [haveCharacterGroup, setHaveCharacterGroup] = useState<ObjectCharacter[]>([]);
   //입력한 캐릭터 정보 (List.tsx)
   const [char, setChar] = useState<ObjectCharacter>();
   //보유중인 보석 정보(ex.보석 이름, 보석 효과) (Gem.tsx)
@@ -103,7 +103,7 @@ export const Context = ({children}: {children: JSX.Element}) => {
     document.cookie = "safeCookie2=foo";  
     document.cookie = "crossCookie=bar; SameSite=None; Secure";
   }
-  const value = { test, setTest, char, setChar, gems, setGems, effects, setEffects, weapon, setWeapon, hide, setHide,estherColor, relicsColor, heroColor, legendColor, oldColor, esther, old, relics, hero, legend, elName, search, input };
+  const value = { haveCharacterGroup, setHaveCharacterGroup, char, setChar, gems, setGems, effects, setEffects, weapon, setWeapon, hide, setHide,estherColor, relicsColor, heroColor, legendColor, oldColor, esther, old, relics, hero, legend, elName, search, input };
   
   return (
     <AppC.Provider value={value}>
