@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import { ObjectCharacter } from "../../type/typeContext";
 function List() {
   const [drop, setDrop] = useState(false);
-  const { char, haveCharacterGroup, setHaveCharacterGroup } = useContext(AppC);
+  const { char, haveCharacterGroup, setHaveCharacterGroup, setInput } = useContext(AppC);
   const name = useLocation();
   const group: ObjectCharacter[]= name.state.group;
   //드롭다운 메뉴
@@ -12,11 +12,12 @@ function List() {
     setDrop(!drop);
   };
   const reset = () => {
-    setHaveCharacterGroup([])
+    //인풋값 초기화
+    setInput(null);
   }
   return (
     <div className='name'>
-      {test !== undefined && 
+      {haveCharacterGroup !== undefined && 
         <div className='name-sub'>
           <Link to="/" state="" onClick={reset}>
             <p><img src='./icon/mococo2.gif' alt='메인으로가기'></img></p>

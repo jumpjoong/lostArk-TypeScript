@@ -9,7 +9,7 @@ function Group() {
       {
         haveCharacterGroup && haveCharacterGroup.map((obj, key)=>{
             return <li key={key}>
-              <Link to={`/${obj.CharacterName}`} state={{ name : obj.CharacterName, group : test}}>
+              <Link to={`/${obj.CharacterName}`} state={{ name : obj.CharacterName, group : haveCharacterGroup}}>
                 <div className="char-box">
                   <p className="server">
                     {obj.ServerName}

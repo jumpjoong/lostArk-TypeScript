@@ -4,6 +4,7 @@ import { Effects, GemsType, ObjectCharacter, Weapon } from "../type/typeContext"
 interface AppContextProps {
   elName: React.RefObject<HTMLInputElement>;
   search: (e: React.FormEvent<HTMLFormElement>) => void;
+  setInput: React.Dispatch<string | null>
   input: string | null;
   haveCharacterGroup: ObjectCharacter[];
   setHaveCharacterGroup: React.Dispatch<React.SetStateAction<ObjectCharacter[]>>;
@@ -103,8 +104,7 @@ export const Context = ({children}: {children: JSX.Element}) => {
     document.cookie = "safeCookie2=foo";  
     document.cookie = "crossCookie=bar; SameSite=None; Secure";
   }
-  const value = { haveCharacterGroup, setHaveCharacterGroup, char, setChar, gems, setGems, effects, setEffects, weapon, setWeapon, hide, setHide,estherColor, relicsColor, heroColor, legendColor, oldColor, esther, old, relics, hero, legend, elName, search, input };
-  
+  const value = { haveCharacterGroup, setHaveCharacterGroup, char, setChar, gems, setGems, effects, setEffects, weapon, setWeapon, hide, setHide,estherColor, relicsColor, heroColor, legendColor, oldColor, esther, old, relics, hero, legend, elName, search, input, setInput };
   return (
     <AppC.Provider value={value}>
       {children}
