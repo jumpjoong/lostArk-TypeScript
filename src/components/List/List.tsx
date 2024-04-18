@@ -19,7 +19,7 @@ function List() {
     <div className='name'>
       {haveCharacterGroup !== undefined && 
         <div className='name-sub'>
-          <Link to="/" state="" onClick={reset}>
+          <Link to="/" onClick={reset}>
             <p><img src='./icon/mococo2.gif' alt='메인으로가기'></img></p>
           </Link>
           <div className='header-sub' onClick={list}>
